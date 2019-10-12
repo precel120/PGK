@@ -11,11 +11,13 @@ public class PlayerMov : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private bool faceRight;
     private bool onGround;
+    private Animator animator;
     
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
         faceRight = true;
         onGround = true;
     }
@@ -32,8 +34,8 @@ public class PlayerMov : MonoBehaviour
 
     void Move(float horizontal)
     {
-       //transform.Translate()
-         _rigidbody2D.velocity = new Vector2(horizontal * Speed,_rigidbody2D.velocity.y);
+         _rigidbody2D.velocity = new Vector2(horizontal * Speed, _rigidbody2D.velocity.y);
+        animator.SetFloat("Speed",Mathf.Abs(horizontal));
     }
     void Flip(float horizontal)
     {
@@ -45,10 +47,12 @@ public class PlayerMov : MonoBehaviour
             transform.localScale = flip;
         }
     }
+
     void Jump()
     {
         onGround = false;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, JumpHeight), ForceMode2D.Impulse);
+        animator.SetBool("Jump", true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +60,7 @@ public class PlayerMov : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             onGround = true;
+            animator.SetBool("Jump", false);
         }
     }
 
