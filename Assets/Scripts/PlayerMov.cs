@@ -58,4 +58,9 @@ public class PlayerMov : MonoBehaviour
             onGround = true;
         }
     }
+
+    private void Shoot()
+    {
+        
+    }
 }
