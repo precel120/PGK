@@ -1,4 +1,3 @@
 ProjectSettings/
-Assembly-CSharp-Editor.csproj
-Assembly-CSharp.csproj
+*.csproj
 *.sln
