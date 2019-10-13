@@ -42,9 +42,8 @@ public class PlayerMov : MonoBehaviour
         if (horizontal > 0 && !faceRight || horizontal < 0 && faceRight)
         {
             faceRight = !faceRight;
-            Vector3 flip = gameObject.transform.localScale;
-            flip.x *= -1;
-            transform.localScale = flip;
+
+            transform.Rotate(0f, 180f, 0f);
         }
     }
 
@@ -62,10 +61,5 @@ public class PlayerMov : MonoBehaviour
             onGround = true;
             animator.SetBool("Jump", false);
         }
-    }
-
-    private void Shoot()
-    {
-        
     }
 }
