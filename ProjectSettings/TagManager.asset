@@ -9,6 +9,7 @@ TagManager:
   - Fireball
   - Water
   - Frostball
+  - Enemy
   layers:
   - Default
   - TransparentFX

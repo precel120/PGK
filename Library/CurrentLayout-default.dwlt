@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 8}
-  m_MinSize: {x: 950, y: 494}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 444}
   m_MaxSize: {x: 22012, y: 10022}
   vertical: 0
-  controlID: 152
+  controlID: 149
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -323,10 +323,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 200
+    x: 285
     y: 73
-    width: 899
-    height: 493
+    width: 750
+    height: 492
   m_ViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
     m_KeySerializationHelper:
@@ -335,11 +335,11 @@ MonoBehaviour:
     - e00: 0.58680034
       e01: 0
       e02: 0
-      e03: -49.484978
+      e03: -49.484955
       e10: 0
       e11: 0.58680034
       e12: 0
-      e13: 123.71595
+      e13: 123.71596
       e20: 0
       e21: 0
       e22: 1
@@ -387,14 +387,14 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2122
-    y: 570
-    width: 531
-    height: 272
+    x: 285
+    y: 584
+    width: 750
+    height: 417
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1190
+  m_LastSelectedObjectID: -1176
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -421,8 +421,8 @@ MonoBehaviour:
     height: 416
   m_ViewDataDictionary: {fileID: 0}
   m_ResetOnNextRepaint: 0
-  m_SelectedAssetPath: Assets/Sprites/Water.png
-  m_SelectedSpriteRectGUID: 5e97eb03825dee720800000000000000
+  m_SelectedAssetPath: Assets/Imported/GothicVania Church/Sprites/Player/idle1.png
+  m_SelectedSpriteRectGUID: b076638a4f2444649a6325f181f02b31
   m_LastUsedModuleTypeName: 
 --- !u!114 &16
 MonoBehaviour:
@@ -520,20 +520,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Adam\Desktop\MagicznaPlatformowka
+  m_LastProjectPath: C:\Users\Maciej Pracucik\Desktop\Programy\Repo\PGK
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de320000
-    m_LastClickedID: 13022
-    m_ExpandedIDs: 000000006a2d00008c2f0000dc340000de340000e034000000ca9a3b
+    m_SelectedIDs: 842f0000
+    m_LastClickedID: 12164
+    m_ExpandedIDs: 00000000682d0000562e0000602e00008a2f0000243200001a330000dc340000de340000e034000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -561,7 +561,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006a2d00008c2f0000dc340000de340000e0340000
+    m_ExpandedIDs: 00000000682d00008a2f0000dc340000de340000e0340000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -605,7 +605,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 4}
+      m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 42fbffff
+      m_ExpandedIDs: 1e08ffff5408fffffa08ffff160affff480affffec0affff6afbffff04340000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -746,9 +746,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -6.924356, y: -0.4269921, z: -5.607211}
+    m_Target: {x: -6.5528846, y: -2.5758796, z: 0}
     speed: 2
-    m_Value: {x: 0.6148193, y: 0.29082596, z: -8.982484}
+    m_Value: {x: -6.5528846, y: -2.5758796, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -781,9 +781,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 11.2901945
+    m_Target: 8.619967
     speed: 2
-    m_Value: 4.913693
+    m_Value: 8.619967
   m_Ortho:
     m_Target: 1
     speed: 2

@@ -29,8 +29,24 @@ public class ProjectileMov : MonoBehaviour
             {
                 Instantiate(waterPrefab, gameObject.transform.position, gameObject.transform.rotation);
             }
+            if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<FoeMov>().Health -= 10;
+                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+            }
+            if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<FoeMov>().Health -= 15;
+                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+            }
+            if (gameObject.tag == "Water" && collision.gameObject.tag == "Enemy")
+            {
+                collision.gameObject.GetComponent<FoeMov>().Health -= 30;
+                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+            }
             Destroy(gameObject);
         }
+        
     }
 
     void RotateOnMov()

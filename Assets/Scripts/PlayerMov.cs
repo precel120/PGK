@@ -12,7 +12,9 @@ public class PlayerMov : MonoBehaviour
     private bool faceRight;
     private bool onGround;
     private Animator animator;
-    
+    private int health;
+    public int Health { get { return health; } set { health = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PlayerMov : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         faceRight = true;
         onGround = true;
+        Health = 100;
     }
 
     // Update is called once per frame
@@ -60,6 +63,15 @@ public class PlayerMov : MonoBehaviour
         {
             onGround = true;
             animator.SetBool("Jump", false);
+        }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Health -= 10;
+            //animator.SetFloat("DamageTaken", 10);
+            if (Health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
