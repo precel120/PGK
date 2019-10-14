@@ -25,10 +25,9 @@ public class ProjectileMov : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player"))
         {
-            if((gameObject.CompareTag("Fireball") && collision.gameObject.CompareTag("Frostball")) | (gameObject.CompareTag("Frostball") && collision.gameObject.CompareTag("Fireball")))
+            if(gameObject.CompareTag("Fireball") && collision.gameObject.CompareTag("Frostball"))
             {
                 Instantiate(waterPrefab, gameObject.transform.position, gameObject.transform.rotation);
-                Destroy(gameObject);
             }
             Destroy(gameObject);
         }
