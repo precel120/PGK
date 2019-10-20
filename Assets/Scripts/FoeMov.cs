@@ -22,6 +22,7 @@ public class FoeMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Health);
         if (transform.position == points[currentPoint].position)
         {
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
@@ -37,9 +38,8 @@ public class FoeMov : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    IEnumerator WaitTime(float seconds)
+    public void takeDamage(int damage)
     {
-        yield return new WaitForSeconds(seconds);
+        health -= damage;
     }
 }

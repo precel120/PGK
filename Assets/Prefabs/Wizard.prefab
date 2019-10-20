@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1693694740569765381}
   - component: {fileID: 3091507901925237348}
   - component: {fileID: 1693694740569765376}
-  - component: {fileID: 1693694740569765377}
-  m_Layer: 0
+  - component: {fileID: 1577354422}
+  - component: {fileID: 1577354428}
+  m_Layer: 10
   m_Name: Wizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSpot: {fileID: 3629043193667496443}
-  fireballprefab: {fileID: 4702706576263507630, guid: 413a243d706224a44a89fdcc8a1e02c0,
+  fireballprefab: {fileID: 6624319239083407662, guid: 75e732cb59af2a042ab35cdc9fa2031a,
     type: 3}
 --- !u!61 &1693694740569765376
 BoxCollider2D:
@@ -142,27 +143,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20917296, y: 0.4229764}
   m_EdgeRadius: 0
---- !u!50 &1693694740569765377
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!61 &1577354422
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693694740569765380}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008169644, y: -0.118459865}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.81, y: 0.66}
+    newSize: {x: 0.81, y: 0.66}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.20544629, y: 0.42308024}
+  m_EdgeRadius: 0
+--- !u!95 &1577354428
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693694740569765380}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b1d742b206544b4c9e83e359073cf38, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6258498955715200064
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3629043193667496443}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireSpot
   m_TagString: FireSpot
   m_Icon: {fileID: 0}

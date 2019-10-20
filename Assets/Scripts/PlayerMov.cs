@@ -8,10 +8,16 @@ public class PlayerMov : MonoBehaviour
 {
     public float Speed;
     public float JumpHeight;
+    public float startTimeBtwAttack;
+    public Transform attackPos;
+    public LayerMask whatisEnemies;
+    public float attackRange;
+
     private Rigidbody2D _rigidbody2D;
     private bool faceRight;
     private bool onGround;
     private Animator animator;
+    private float timeBtwAttack;
     private int health;
     public int Health { get { return health; } set { health = value; } }
 
@@ -32,7 +38,24 @@ public class PlayerMov : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Move(horizontal);
         Flip(horizontal);
+
         if (Input.GetKeyDown("space") && onGround) Jump();
+
+        if (timeBtwAttack <= 0)
+        {
+            if (Input.GetKey(KeyCode.J))
+            {
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(5);
+                }
+                animator.SetBool("IsAttacking", true);
+                timeBtwAttack = startTimeBtwAttack;
+            }
+            else animator.SetBool("IsAttacking", false);
+        }
+        else timeBtwAttack -= Time.deltaTime;
     }
 
     void Move(float horizontal)
@@ -40,6 +63,7 @@ public class PlayerMov : MonoBehaviour
          _rigidbody2D.velocity = new Vector2(horizontal * Speed, _rigidbody2D.velocity.y);
         animator.SetFloat("Speed",Mathf.Abs(horizontal));
     }
+
     void Flip(float horizontal)
     {
         if (horizontal > 0 && !faceRight || horizontal < 0 && faceRight)
@@ -67,11 +91,17 @@ public class PlayerMov : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Health -= 10;
-            //animator.SetFloat("DamageTaken", 10);
+            //animator.SetFloat("DamageTaken", 10f);
             if (Health <= 0)
             {
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 }

@@ -31,18 +31,15 @@ public class ProjectileMov : MonoBehaviour
             }
             if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<FoeMov>().Health -= 10;
-                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+                collision.gameObject.GetComponent<FoeMov>().takeDamage(10);
             }
             if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<FoeMov>().Health -= 15;
-                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+                collision.gameObject.GetComponent<FoeMov>().takeDamage(15);
             }
             if (gameObject.tag == "Water" && collision.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<FoeMov>().Health -= 30;
-                Debug.Log(collision.gameObject.GetComponent<FoeMov>().Health);
+                collision.gameObject.GetComponent<FoeMov>().takeDamage(30);
             }
             Destroy(gameObject);
         }
