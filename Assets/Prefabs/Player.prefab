@@ -160,9 +160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSpot: {fileID: 9073914676985209321}
-  fireballprefab: {fileID: 2502261686890658766, guid: a8fa582c6d63ec244a8a385a854a3c95,
+  fireballprefab: {fileID: 4702706576263507630, guid: 413a243d706224a44a89fdcc8a1e02c0,
     type: 3}
-  frostballprefab: {fileID: 728830123747425448, guid: 5ba2239d63fb61e4eaa22ef468bca736,
+  frostballprefab: {fileID: 2477564040831108738, guid: 5b0ad53bcd202924fb88e0ca0efde85b,
     type: 3}
 --- !u!95 &616469132
 Animator:
@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8715201990680034418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.131, y: 0.0206, z: 0}
+  m_LocalPosition: {x: 0.13, y: 0.025, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 451412482887408950}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell : MonoBehaviour
+public class PlayerSpell : MonoBehaviour
 {
     public Transform fireSpot;
     public GameObject fireballprefab;
@@ -11,7 +11,7 @@ public class Spell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class Spell : MonoBehaviour
 
     void Shoot(string key)
     {
-        if(key == "1")
+        if (key == "1")
         {
             Instantiate(fireballprefab, fireSpot.position, fireSpot.rotation);
         }
@@ -37,6 +37,6 @@ public class Spell : MonoBehaviour
         {
             Instantiate(frostballprefab, fireSpot.position, fireSpot.rotation);
         }
-    
+
     }
 }
