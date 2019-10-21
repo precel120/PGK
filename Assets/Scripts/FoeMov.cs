@@ -3,7 +3,6 @@ using System.Collections;
 
 public class FoeMov : MonoBehaviour
 {
-
     public Transform[] points;
     private float moveSpeed;
     public float speed;
@@ -22,10 +21,9 @@ public class FoeMov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Health);
         if (transform.position == points[currentPoint].position)
         {
-            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+            transform.Rotate(0f, 180f, 0f);
             currentPoint++;
         }
         if (currentPoint >= points.Length)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3632614158856439856}
   - component: {fileID: 6861783720248903218}
   - component: {fileID: -5855791474103034068}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: WizardFireBall
   m_TagString: EnemyFireBall
   m_Icon: {fileID: 0}
@@ -119,6 +119,8 @@ MonoBehaviour:
   waterPrefab: {fileID: 903866671471962032, guid: e3e57bc6c08a93344bc830d62f5c1fd3,
     type: 3}
   rb: {fileID: 6861783720248903218}
+  waterExplosion: {fileID: 6449514803196753736, guid: 82ca6775cfd83384aac86fc2b929629f,
+    type: 3}
 --- !u!50 &6861783720248903218
 Rigidbody2D:
   serializedVersion: 4
@@ -150,9 +152,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005520725, y: 0.016562259}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.096875474
+  m_Radius: 0.094779104

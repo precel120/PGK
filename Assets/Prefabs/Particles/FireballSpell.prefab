@@ -4848,7 +4848,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.32, y: 0.4}
@@ -4891,6 +4891,7 @@ MonoBehaviour:
   waterPrefab: {fileID: 903866671471962032, guid: e3e57bc6c08a93344bc830d62f5c1fd3,
     type: 3}
   rb: {fileID: 67235311651518970}
+  waterExplosion: {fileID: 0}
 --- !u!1 &5162001759704765627
 GameObject:
   m_ObjectHideFlags: 0

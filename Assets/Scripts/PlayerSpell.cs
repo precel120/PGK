@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSpell : MonoBehaviour
+public class PlayerSpell : Spell
 {
-    public Transform fireSpot;
-    public GameObject fireballprefab;
-    public GameObject frostballprefab;
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
