@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1566227072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1566227073}
+  m_Layer: 8
+  m_Name: MeleeSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1566227073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566227072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.233, y: -0.049, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 451412482887408950}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7528384811347140653
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,8 +42,10 @@ GameObject:
   - component: {fileID: 5223423367908755786}
   - component: {fileID: 5196898678402163720}
   - component: {fileID: 7573678812840833008}
+  - component: {fileID: 7691412924895931018}
   - component: {fileID: 7122024993931362377}
-  - component: {fileID: 893696425}
+  - component: {fileID: 616469132}
+  - component: {fileID: 623097169}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -33,6 +65,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 9073914676985209321}
+  - {fileID: 1566227073}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -132,6 +165,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16881716, y: 0.45077047}
   m_EdgeRadius: 0
+--- !u!114 &7691412924895931018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528384811347140653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310e5912913d4974a90f3b4b7b50c56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7122024993931362377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +191,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   JumpHeight: 15
---- !u!114 &893696425
+  startTimeBtwAttack: 0.3
+  attackPos: {fileID: 1566227073}
+  whatisEnemies:
+    serializedVersion: 2
+    m_Bits: 1024
+  attackRange: 0.45
+--- !u!95 &616469132
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528384811347140653}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b64bf741ad5fe147a34908bbc494227, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &623097169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,13 +225,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7528384811347140653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6379050d5e6426641b30bd59e48bbcc2, type: 3}
+  m_Script: {fileID: 11500000, guid: f0bdf05bde88efc40aa3d4cbb8bd89cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fireSpot: {fileID: 9073914676985209321}
-  fireballprefab: {fileID: 2502261686890658766, guid: a8fa582c6d63ec244a8a385a854a3c95,
+  fireballprefab: {fileID: 4702706576263507630, guid: 413a243d706224a44a89fdcc8a1e02c0,
     type: 3}
-  frostballprefab: {fileID: 728830123747425448, guid: 5ba2239d63fb61e4eaa22ef468bca736,
+  frostballprefab: {fileID: 2477564040831108738, guid: 5b0ad53bcd202924fb88e0ca0efde85b,
     type: 3}
 --- !u!1 &8715201990680034418
 GameObject:
@@ -187,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8715201990680034418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.131, y: 0.0206, z: 0}
+  m_LocalPosition: {x: 0.13, y: 0.025, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 451412482887408950}
