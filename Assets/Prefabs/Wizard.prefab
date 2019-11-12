@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1693694740569765381}
   - component: {fileID: 3091507901925237348}
   - component: {fileID: 1577354422}
-  - component: {fileID: 1577354428}
+  - component: {fileID: 2112984698}
   m_Layer: 10
   m_Name: Wizard
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1693694740569765380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.243237, y: -2.3, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 0}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 0}
   m_Children:
   - {fileID: 3629043193667496443}
   m_Father: {fileID: 0}
@@ -100,7 +100,8 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
-  speed: 2.5
+  isFrozen: 0
+  freezeCounter: 0
 --- !u!114 &3091507901925237348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693694740569765380}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 905d99015bbccc44cbe829fea0a8ecd2, type: 3}
   m_Name: 
@@ -117,6 +118,7 @@ MonoBehaviour:
   fireballprefab: {fileID: 6624319239083407662, guid: 75e732cb59af2a042ab35cdc9fa2031a,
     type: 3}
   frostballprefab: {fileID: 0}
+  spellCooldown: 3
 --- !u!61 &1577354422
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +145,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20544629, y: 0.42308024}
   m_EdgeRadius: 0
---- !u!95 &1577354428
+--- !u!95 &2112984698
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -153,7 +155,7 @@ Animator:
   m_GameObject: {fileID: 1693694740569765380}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6b1d742b206544b4c9e83e359073cf38, type: 2}
+  m_Controller: {fileID: 9100000, guid: 791b0aaa20c56d242b4af794180b775d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

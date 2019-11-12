@@ -1,16 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class ProjectileMov : MonoBehaviour
 {
     public float projectileSpeed;
-    private float speed = 0.01f;
     public GameObject waterPrefab;
     public Rigidbody2D rb;
     public ParticleSystem waterExplosion;
+    private float lifeTime = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * projectileSpeed;
+        if(gameObject.CompareTag("Fireball"))
+        {
+            lifeTime = 2.0f;
+        }
+        else if(gameObject.CompareTag("Frostball"))
+        {
+            lifeTime = 5.0f;
+        }
+        Destroy(gameObject, lifeTime);
     }
 
     // Update is called once per frame
@@ -18,7 +29,11 @@ public class ProjectileMov : MonoBehaviour
     {
         if(gameObject.CompareTag("Water"))
         {
-            RotateOnMov();
+            RotateOnMov(-0.5f);
+        }
+        if (gameObject.CompareTag("Frostball"))
+        {
+            RotateOnMov(2.0f);
         }
     }
 
@@ -30,11 +45,15 @@ public class ProjectileMov : MonoBehaviour
         }
         if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<FoeMov>().takeDamage(10);
+            collision.gameObject.GetComponent<FoeMov>().takeDamage(20);
+            if (collision.gameObject.GetComponent<FoeMov>().Health <= 0)
+            collision.gameObject.GetComponent<FoeMov>().onFire = true;
         }
         if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<FoeMov>().takeDamage(15);
+            collision.gameObject.GetComponent<FoeMov>().takeDamage(5);
+            if(collision.gameObject.GetComponent<FoeMov>().freezeCounter==0)
+            collision.gameObject.GetComponent<FoeMov>().isFrozen = true;
         }
         if (gameObject.tag == "Water" && collision.gameObject.tag == "Enemy")
         {
@@ -48,8 +67,8 @@ public class ProjectileMov : MonoBehaviour
         
     }
 
-    void RotateOnMov()
+    void RotateOnMov(float value)
     {
-        gameObject.transform.Rotate(0, 0, -0.5f);
+        gameObject.transform.Rotate(0, 0, value);
     }
 }

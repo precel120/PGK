@@ -4887,7 +4887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1821a4bfd643e349bb573ce6759bac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 10
+  projectileSpeed: 15
   waterPrefab: {fileID: 903866671471962032, guid: e3e57bc6c08a93344bc830d62f5c1fd3,
     type: 3}
   rb: {fileID: 67235311651518970}

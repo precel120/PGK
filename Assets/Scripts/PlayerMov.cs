@@ -13,17 +13,21 @@ public class PlayerMov : MonoBehaviour
     public LayerMask whatisEnemies;
     public float attackRange;
 
+    private BoxCollider2D feet;
     private Rigidbody2D _rigidbody2D;
     private bool faceRight;
     private bool onGround;
     private Animator animator;
+    [SerializeField] private Animator windAnim;
     private float timeBtwAttack;
+    [SerializeField] private int extraJump;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
+        feet = gameObject.GetComponent<BoxCollider2D>();
         faceRight = true;
         onGround = true;
     }
@@ -36,16 +40,24 @@ public class PlayerMov : MonoBehaviour
         Move(horizontal);
         Flip(horizontal);
 
-        if (Input.GetKeyDown("space")) Jump();
+        if(feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            extraJump = 2;
+        }
+
+        if (Input.GetKeyDown("space") && extraJump > 0)
+        {
+            Jump();
+        }
 
         if (timeBtwAttack <= 0)
         {
-            if (Input.GetKey(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J))
             {
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(12);
+                    enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(15);
                 }
                 animator.SetBool("IsAttacking", true);
                 timeBtwAttack = startTimeBtwAttack;
@@ -71,19 +83,42 @@ public class PlayerMov : MonoBehaviour
         }
     }
 
+    public void PushBack()
+    {
+        Vector3 pos = gameObject.transform.position;
+        if(faceRight)
+            _rigidbody2D.transform.localPosition = new Vector3(pos.x - 3f, pos.y);
+        else
+            _rigidbody2D.transform.localPosition = new Vector3(pos.x + 3f, pos.y);
+    }
+
     void Jump()
     {
-        onGround = false;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, JumpHeight), ForceMode2D.Impulse);
+        if (extraJump == 1)
+        {
+            StartCoroutine(doubleJump());
+        }
+
+        if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")) && extraJump == 0)
+            return;
+
+        Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
+        _rigidbody2D.velocity += jumpVelocity;
         animator.SetBool("Jump", true);
+
+        extraJump--;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            onGround = true;
             animator.SetBool("Jump", false);
+            if (feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                windAnim.SetBool("PlayerDoubleJump", false);
+                gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
     }
 
@@ -91,5 +126,13 @@ public class PlayerMov : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
+    }
+    private IEnumerator doubleJump()
+    {
+        windAnim.SetBool("PlayerDoubleJump", true);
+        gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = true;
+        yield return new WaitForSeconds(0.4f);
+        windAnim.SetBool("PlayerDoubleJump", false);
+        gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
     }
 }
