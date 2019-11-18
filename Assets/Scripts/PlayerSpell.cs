@@ -17,14 +17,16 @@ public class PlayerSpell : Spell
     private bool canUseFrost = false;
     public bool CanUseFrost { get { return canUseFrost; } set { canUseFrost = value; } }
 
-    private CooldownMeter cooldownMeter;
+    private FireCooldownMeter fireCooldownMeter;
+    private FrostCooldownMeter frostCooldownMeter;
 
     // Start is called before the first frame update
     void Start()
     {
         fireCooldown = 1.0f;
         frostCooldown = 2.0f;
-        cooldownMeter = GameObject.FindObjectOfType<CooldownMeter>();
+        fireCooldownMeter = GameObject.FindObjectOfType<FireCooldownMeter>();
+        frostCooldownMeter = GameObject.FindObjectOfType<FrostCooldownMeter>();
     }
 
     // Update is called once per frame
@@ -36,12 +38,11 @@ public class PlayerSpell : Spell
             {
                 Shoot(fireballKey);
                 fireCooldownDuration = Time.time + fireCooldown;
-                cooldownMeter.ResetMeter();
+                fireCooldownMeter.FlameResetMeter();
             }
         }
 
-        cooldownMeter.HandleCooldown(fireCooldown);
-
+        fireCooldownMeter.FlameHandleCooldown(fireCooldown);
 
         if (Time.time > frostCooldownDuration)
         {
@@ -49,8 +50,11 @@ public class PlayerSpell : Spell
             {
                 Shoot(frostballKey);
                 frostCooldownDuration = Time.time + frostCooldown;
+                frostCooldownMeter.FrostResetMeter();
             }
         }
+
+        frostCooldownMeter.FrostHandleCooldown(frostCooldown);
     }
 
     void Shoot(string key)

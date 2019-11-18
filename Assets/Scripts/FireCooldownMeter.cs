@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownMeter : MonoBehaviour
+public class FireCooldownMeter : MonoBehaviour
 {
     [SerializeField]
-    private Image content;
+    private Image flame;
 
     // Start is called before the first frame update
     void Start()
@@ -17,16 +17,16 @@ public class CooldownMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void HandleCooldown(float amount)
+    public void FlameHandleCooldown(float amount)
     {
-        content.fillAmount += 1 / amount * Time.deltaTime;
+        flame.fillAmount += 1 / amount * Time.deltaTime;
     }
 
-    public void ResetMeter()
+    public void FlameResetMeter()
     {
-        content.fillAmount = 0;
+        flame.fillAmount = 0;
     }
 }
