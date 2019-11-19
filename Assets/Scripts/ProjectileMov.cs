@@ -46,8 +46,8 @@ public class ProjectileMov : MonoBehaviour
         if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<FoeMov>().takeDamage(20);
-            if (collision.gameObject.GetComponent<FoeMov>().Health <= 0)
-            collision.gameObject.GetComponent<FoeMov>().onFire = true;
+            //if (collision.gameObject.GetComponent<FoeMov>().Health <= 0)
+           // collision.gameObject.GetComponent<FoeMov>().onFire = true;
         }
         if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Enemy")
         {

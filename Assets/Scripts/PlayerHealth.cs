@@ -34,6 +34,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collison)
+    {
+        if(collison.gameObject.tag == "Abyss")
+        {
+            StartCoroutine(waitBeforeReset());
+        }
+    }
+
     public void takeDamage(int damage)
     {
         Health -= damage;

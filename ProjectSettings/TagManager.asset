@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - EnemyFireBall
   - FireObstacle
+  - Abyss
   layers:
   - Default
   - TransparentFX

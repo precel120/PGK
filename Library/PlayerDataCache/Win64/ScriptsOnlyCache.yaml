@@ -7,11 +7,12 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachineFramingTransposer
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineVirtualCamera
-    - CooldownMeter
+    - FireCooldownMeter
     - FireScroll
     - FireWall
     - FoeMov
     - FoeSpell
+    - FrostCooldownMeter
     - FrostScroll
     - HealthBar
     - HealthPotion
@@ -21,8 +22,6 @@ ScriptsOnlyBuild:
     - PlayerSpell
     - ProjectileMov
     - VinesObstacle
-    Unity.2D.Sprite.Editor.dll:
-    - UnityEditor.U2D.Sprites.SpriteEditorWindow
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
@@ -36,10 +35,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -69,21 +66,21 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9704}
+      Script: {instanceID: 9706}
     - Class: 114
-      Script: {instanceID: 9906}
+      Script: {instanceID: 9908}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10304}
+      Script: {instanceID: 10306}
     - Class: 114
-      Script: {instanceID: 10672}
+      Script: {instanceID: 10674}
     - Class: 114
-      Script: {instanceID: 11154}
+      Script: {instanceID: 11156}
     - Class: 114
-      Script: {instanceID: 11524}
+      Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 14620}
+      Script: {instanceID: 13518}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -134,61 +131,63 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 610}
+      Script: {instanceID: 608}
     - Class: 114
-      Script: {instanceID: 9704}
+      Script: {instanceID: 9706}
     - Class: 114
-      Script: {instanceID: 9866}
+      Script: {instanceID: 9868}
     - Class: 114
-      Script: {instanceID: 9906}
+      Script: {instanceID: 9908}
     - Class: 114
-      Script: {instanceID: 10208}
+      Script: {instanceID: 10210}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10304}
+      Script: {instanceID: 10306}
     - Class: 114
-      Script: {instanceID: 10404}
+      Script: {instanceID: 10406}
     - Class: 114
-      Script: {instanceID: 11024}
+      Script: {instanceID: 11026}
     - Class: 114
-      Script: {instanceID: 11154}
+      Script: {instanceID: 11156}
     - Class: 114
-      Script: {instanceID: 11524}
+      Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 14582}
+      Script: {instanceID: 13480}
     - Class: 114
-      Script: {instanceID: 14590}
+      Script: {instanceID: 13488}
     - Class: 114
-      Script: {instanceID: 14600}
+      Script: {instanceID: 13498}
     - Class: 114
-      Script: {instanceID: 14604}
+      Script: {instanceID: 13502}
     - Class: 114
-      Script: {instanceID: 14636}
+      Script: {instanceID: 13534}
     - Class: 114
-      Script: {instanceID: 14644}
+      Script: {instanceID: 13542}
     - Class: 114
-      Script: {instanceID: 14652}
+      Script: {instanceID: 13550}
     - Class: 114
-      Script: {instanceID: 14662}
+      Script: {instanceID: 13560}
     - Class: 114
-      Script: {instanceID: 14694}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 14726}
+      Script: {instanceID: 13624}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 13630}
     - Class: 114
-      Script: {instanceID: 14756}
+      Script: {instanceID: 13650}
     - Class: 114
-      Script: {instanceID: 14766}
+      Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 14778}
+      Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 14800}
+      Script: {instanceID: 13678}
     - Class: 114
-      Script: {instanceID: 14806}
+      Script: {instanceID: 13700}
     - Class: 114
-      Script: {instanceID: 14808}
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13708}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -766,10 +765,10 @@ ScriptsOnlyBuild:
     className: CinemachinePOV
   - hash:
       serializedVersion: 2
-      Hash: 53011401d85767d83cb0b5012ed03c5c
+      Hash: c508024b6075e76351ed38a8330d764a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: CooldownMeter
+    className: FireCooldownMeter
   - hash:
       serializedVersion: 2
       Hash: 0ba5e49f32f0d0e4ea81741aba009aa6
@@ -836,6 +835,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FoeMov
+  - hash:
+      serializedVersion: 2
+      Hash: c8e01ce535dab2e77d78b86d93572ec1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FrostCooldownMeter
   - hash:
       serializedVersion: 2
       Hash: f66c5abb945dada48d2efafbec53efa6

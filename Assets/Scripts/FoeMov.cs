@@ -49,14 +49,11 @@ public class FoeMov : MonoBehaviour
             StartCoroutine(freeze());
         }
         transform.position = Vector2.MoveTowards(transform.position, points[currentPoint].position, moveSpeed = Time.deltaTime * speed);
-        if (onFire && Health <= 0)
+        if (Health <= 0)
         {
             StartCoroutine(killFoe());
         }
-        else if(!onFire && Health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
     }
     public void takeDamage(int damage)
     {
