@@ -40,6 +40,11 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(waitBeforeReset());
         }
+        if (collison.gameObject.tag == "SpikePit")
+        {
+            StartCoroutine(waitBeforeReset());
+        }
+
     }
 
     public void takeDamage(int damage)
@@ -64,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator waitBeforeReset()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
     private IEnumerator waitDamageTaken()
