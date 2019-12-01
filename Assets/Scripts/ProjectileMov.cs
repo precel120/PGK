@@ -9,10 +9,20 @@ public class ProjectileMov : MonoBehaviour
     public Rigidbody2D rb;
     public ParticleSystem waterExplosion;
     private float lifeTime = 2.0f;
+    private Vector3 startingPos;
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * projectileSpeed;
+        if (!gameObject.CompareTag("EarthSpell"))
+        {
+            rb.velocity = transform.right * projectileSpeed;
+        }
+        else
+        {
+            startingPos = gameObject.transform.position;
+            rb.AddForce(Vector3.up * 150);
+        }
+
         if(gameObject.CompareTag("Fireball"))
         {
             lifeTime = 2.0f;
@@ -25,7 +35,7 @@ public class ProjectileMov : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(gameObject.CompareTag("Water"))
         {
@@ -34,6 +44,14 @@ public class ProjectileMov : MonoBehaviour
         if (gameObject.CompareTag("Frostball"))
         {
             RotateOnMov(2.0f);
+        }
+        if(gameObject.CompareTag("EarthSpell"))
+        {
+            if(gameObject.transform.position.y - startingPos.y > 1)
+            {
+                rb.velocity = Vector3.zero;
+                rb.velocity = transform.right * projectileSpeed;
+            }
         }
     }
 
@@ -63,6 +81,11 @@ public class ProjectileMov : MonoBehaviour
         {
             Instantiate(waterExplosion, gameObject.transform.position, gameObject.transform.rotation);
         }
+        if(gameObject.tag == "EarthSpell" && collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<FoeMov>().takeDamage(50);
+        }
+
         Destroy(gameObject);
         
     }

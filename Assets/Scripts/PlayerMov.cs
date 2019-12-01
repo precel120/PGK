@@ -145,4 +145,9 @@ public class PlayerMov : MonoBehaviour
         windAnim.SetBool("PlayerDoubleJump", false);
         gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
     }
+
+    public bool getPlayerFaceRight()
+    {
+        return faceRight;
+    }
 }

@@ -16,6 +16,7 @@ TagManager:
   - WallObstacle
   - SpikePit
   - Portal
+  - EarthSpell
   layers:
   - Default
   - TransparentFX

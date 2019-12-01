@@ -271,7 +271,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0074048676, y: -0.283}
+  m_Offset: {x: -0.0064455494, y: -0.283}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -282,7 +282,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.105230324, y: 0.033646286}
+  m_Size: {x: 0.14423065, y: 0.033646286}
   m_EdgeRadius: 0
 --- !u!114 &7691412924895931018
 MonoBehaviour:
@@ -353,6 +353,8 @@ MonoBehaviour:
   fireballprefab: {fileID: 4702706576263507630, guid: 413a243d706224a44a89fdcc8a1e02c0,
     type: 3}
   frostballprefab: {fileID: 2477564040831108738, guid: 5b0ad53bcd202924fb88e0ca0efde85b,
+    type: 3}
+  earthSpellprefab: {fileID: 2874034165187801794, guid: 5d501e556ee79a64883e7f549ba9ff09,
     type: 3}
 --- !u!1 &8715201990680034418
 GameObject:
