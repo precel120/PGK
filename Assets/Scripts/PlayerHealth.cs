@@ -9,11 +9,13 @@ public class PlayerHealth : MonoBehaviour
     private int health;
     public int Health { get { return health; } set { health = value; } }
     private Animator animator;
+    private SpriteRenderer sprite;
     // Start is called before the first frame update
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         Health = 100;
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,10 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(waitBeforeReset());
         }
+        if(collison.gameObject.tag == "Portal")
+        {
+            StartCoroutine(gameWon());
+        }
 
     }
 
@@ -54,10 +60,7 @@ public class PlayerHealth : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            gameObject.GetComponent<PlayerMov>().enabled = false;
-            gameObject.GetComponent<PlayerSpell>().enabled = false;
-            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
-            animator.enabled = false;
+            playerStop();
             StartCoroutine(waitBeforeReset());
         }
     }
@@ -65,6 +68,14 @@ public class PlayerHealth : MonoBehaviour
     public void heal(int amount)
     {
         if(Health+amount<=100)  Health += amount;
+    }
+
+    public void playerStop()
+    {
+        gameObject.GetComponent<PlayerMov>().enabled = false;
+        gameObject.GetComponent<PlayerSpell>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+        animator.enabled = false;
     }
 
     private IEnumerator waitBeforeReset()
@@ -77,5 +88,12 @@ public class PlayerHealth : MonoBehaviour
         animator.SetFloat("DamageTaken", 10f);
         yield return new WaitForSeconds(0.15f);
         animator.SetFloat("DamageTaken", 0.0f);
+    }
+    private IEnumerator gameWon()
+    {
+        sprite.enabled = false;
+        playerStop();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

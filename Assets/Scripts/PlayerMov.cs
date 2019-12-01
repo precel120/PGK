@@ -99,12 +99,22 @@ public class PlayerMov : MonoBehaviour
             StartCoroutine(doubleJump());
         }
 
-        if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")) && extraJump == 0)
+        if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")) && extraJump <= 0)
             return;
 
-        Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
-        _rigidbody2D.velocity += jumpVelocity;
-        animator.SetBool("Jump", true);
+        if (feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
+            _rigidbody2D.velocity += jumpVelocity;
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
+            _rigidbody2D.velocity += jumpVelocity;
+            animator.SetBool("Jump", true);
+            extraJump = 0;
+        }
 
         extraJump--;
     }

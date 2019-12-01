@@ -15,6 +15,7 @@ TagManager:
   - Abyss
   - WallObstacle
   - SpikePit
+  - Portal
   layers:
   - Default
   - TransparentFX
