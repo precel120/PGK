@@ -85,7 +85,6 @@ public class ProjectileMov : MonoBehaviour
         {
             collision.gameObject.GetComponent<FoeMov>().takeDamage(50);
         }
-
         Destroy(gameObject);
         
     }

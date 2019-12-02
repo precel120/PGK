@@ -50,6 +50,10 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(gameWon());
         }
+        if(collison.gameObject.tag == "Collectables")
+        {
+            Destroy(collison.gameObject);
+        }
 
     }
 

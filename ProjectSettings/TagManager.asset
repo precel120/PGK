@@ -17,6 +17,8 @@ TagManager:
   - SpikePit
   - Portal
   - EarthSpell
+  - Collectables
+  - Tree
   layers:
   - Default
   - TransparentFX
