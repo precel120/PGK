@@ -4,7 +4,7 @@ using System.Collections;
 public class FoeMov : MonoBehaviour
 {
     private FoeSpell foeSpell;
-    public Transform[] points;
+    // public Transform[] points;
     private Animator animator;
     public bool isFrozen = false;
     public bool onFire = false;
@@ -20,7 +20,7 @@ public class FoeMov : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         foeSpell = gameObject.GetComponent<FoeSpell>();
         freezeCounter = 0;
-        transform.position = points[0].position;
+        // transform.position = points[0].position;
         currentPoint = 0;
         transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         health = 45;
@@ -34,26 +34,26 @@ public class FoeMov : MonoBehaviour
             animator.enabled = true;
             speed = 2.5f;
             foeSpell.enabled = true;
-            if (transform.position == points[currentPoint].position)
-            {
-                transform.Rotate(0f, 180f, 0f);
-                currentPoint++;
-            }
-            if (currentPoint >= points.Length)
-            {
-                currentPoint = 0;
-            }
+            //if (transform.position == points[currentPoint].position)
+            //{
+            //    transform.Rotate(0f, 180f, 0f);
+            //    currentPoint++;
+            //}
+            //if (currentPoint >= points.Length)
+            //{
+            //    currentPoint = 0;
+            //}
         }
-        else if (isFrozen && freezeCounter==0)
+        else if (isFrozen && freezeCounter == 0)
         {
             StartCoroutine(freeze());
         }
-        transform.position = Vector2.MoveTowards(transform.position, points[currentPoint].position, moveSpeed = Time.deltaTime * speed);
+        // transform.position = Vector2.MoveTowards(transform.position, points[currentPoint].position, moveSpeed = Time.deltaTime * speed);
         if (Health <= 0)
         {
             StartCoroutine(killFoe());
         }
-        
+
     }
     public void takeDamage(int damage)
     {

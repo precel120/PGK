@@ -9,6 +9,7 @@ public class PlayerMov : MonoBehaviour
     public float Speed;
     public float JumpHeight;
     public float startTimeBtwAttack;
+    public float startTimeBtwKick;
     public Transform attackPos;
     public LayerMask whatisEnemies;
     public float attackRange;
@@ -20,6 +21,7 @@ public class PlayerMov : MonoBehaviour
     private Animator animator;
     [SerializeField] private Animator windAnim;
     private float timeBtwAttack;
+    private float timeBtwKick;
     [SerializeField] private int extraJump;
 
     // Start is called before the first frame update
@@ -57,7 +59,9 @@ public class PlayerMov : MonoBehaviour
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(15);
+                    if(enemiesToDamage[i].gameObject.tag=="Enemy") enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Ghul") enemiesToDamage[i].GetComponent<GhulMov>().takeDamageGhul(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Angel") enemiesToDamage[i].GetComponent<AngelMov>().takeDamage(10);
                 }
                 animator.SetBool("IsAttacking", true);
                 timeBtwAttack = startTimeBtwAttack;
@@ -65,6 +69,41 @@ public class PlayerMov : MonoBehaviour
             else animator.SetBool("IsAttacking", false);
         }
         else timeBtwAttack -= Time.deltaTime;
+
+        if (timeBtwKick <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    if (enemiesToDamage[i].gameObject.tag == "Enemy") enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Ghul") enemiesToDamage[i].GetComponent<GhulMov>().takeDamageGhul(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Angel") enemiesToDamage[i].GetComponent<AngelMov>().takeDamage(10);
+                }
+                animator.SetBool("IsKicking", true);
+                timeBtwKick = startTimeBtwKick;
+            }
+            else animator.SetBool("IsKicking", false);
+        }else timeBtwKick -= Time.deltaTime;
+
+        CapsuleCollider2D capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        CapsuleCollider2D tempCapsule = capsuleCollider2D;
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Speed = 0;
+            animator.SetBool("IsCrouching", true);
+            capsuleCollider2D.size *= 0.5f;
+            capsuleCollider2D.offset *= 2.5f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            animator.SetBool("IsCrouching", false);
+            capsuleCollider2D.size /= 0.5f;
+            capsuleCollider2D.offset /= 2.5f;
+            Speed = 10;
+        }
     }
 
     void Move(float horizontal)
@@ -144,6 +183,13 @@ public class PlayerMov : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         windAnim.SetBool("PlayerDoubleJump", false);
         gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    private IEnumerator Crouch()
+    {
+        
+        yield return new WaitForSeconds(0.2f);
+        
     }
 
     public bool getPlayerFaceRight()

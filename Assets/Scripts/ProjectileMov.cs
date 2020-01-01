@@ -73,6 +73,14 @@ public class ProjectileMov : MonoBehaviour
             if(collision.gameObject.GetComponent<FoeMov>().freezeCounter==0)
             collision.gameObject.GetComponent<FoeMov>().isFrozen = true;
         }
+        if(gameObject.tag == "Fireball" && collision.gameObject.tag == "Ghul")
+        {
+            collision.gameObject.GetComponent<GhulMov>().takeDamageGhul(20);
+        }
+        if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Angel")
+        {
+            collision.gameObject.GetComponent<AngelMov>().takeDamage(20);
+        }
         if (gameObject.tag == "Water" && collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<FoeMov>().takeDamage(30);

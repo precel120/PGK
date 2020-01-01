@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Seeding : MonoBehaviour
 {
-    public GameObject gameObject1;
+    public GameObject BigPlant;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject1.SetActive(false);
+        BigPlant.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -16,7 +16,7 @@ public class Seeding : MonoBehaviour
         if (other.gameObject.CompareTag("Water"))
         {
             gameObject.SetActive(false);
-            gameObject1.SetActive(true);
+            BigPlant.SetActive(true);
         }
     }
 }

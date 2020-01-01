@@ -19,6 +19,8 @@ TagManager:
   - EarthSpell
   - Collectables
   - Tree
+  - Ghul
+  - Angel
   layers:
   - Default
   - TransparentFX

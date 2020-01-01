@@ -26,8 +26,6 @@ public class PlayerSpell : Spell
     private FrostCooldownMeter frostCooldownMeter;
     private EarthCooldownMeter earthCooldownMeter;
 
-    private Transform lowerPosition;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +36,6 @@ public class PlayerSpell : Spell
         fireCooldownMeter = GameObject.FindObjectOfType<FireCooldownMeter>();
         frostCooldownMeter = GameObject.FindObjectOfType<FrostCooldownMeter>();
         earthCooldownMeter = GameObject.FindObjectOfType<EarthCooldownMeter>();
-
-        lowerPosition = fireSpot;
-        lowerPosition.position = new Vector3(fireSpot.position.x, fireSpot.position.y - 0.97f, fireSpot.position.z);
     }
 
     // Update is called once per frame
@@ -95,7 +90,7 @@ public class PlayerSpell : Spell
         }
         if(key == earthSpellKey)
         {
-            Instantiate(earthSpellprefab, lowerPosition.position, fireSpot.rotation);
+            Instantiate(earthSpellprefab, new Vector3(fireSpot.position.x, fireSpot.position.y - 0.97f, fireSpot.position.z), fireSpot.rotation);
         }
     }
 }

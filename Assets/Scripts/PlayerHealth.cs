@@ -30,7 +30,15 @@ public class PlayerHealth : MonoBehaviour
         {
             takeDamage(5);
         }
-        if(collision.gameObject.tag == "EnemyFireBall")
+        if (collision.gameObject.tag == "Ghul")
+        {
+            takeDamage(10);
+        }
+        if (collision.gameObject.tag == "Angel")
+        {
+            takeDamage(5);
+        }
+        if (collision.gameObject.tag == "EnemyFireBall")
         {
             takeDamage(20);
         }
