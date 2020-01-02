@@ -62,6 +62,7 @@ public class PlayerMov : MonoBehaviour
                     if(enemiesToDamage[i].gameObject.tag=="Enemy") enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(10);
                     if (enemiesToDamage[i].gameObject.tag == "Ghul") enemiesToDamage[i].GetComponent<GhulMov>().takeDamageGhul(10);
                     if (enemiesToDamage[i].gameObject.tag == "Angel") enemiesToDamage[i].GetComponent<AngelMov>().takeDamage(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Boss") enemiesToDamage[i].GetComponent<Boss>().takeDamage(10);
                 }
                 animator.SetBool("IsAttacking", true);
                 timeBtwAttack = startTimeBtwAttack;
@@ -80,6 +81,7 @@ public class PlayerMov : MonoBehaviour
                     if (enemiesToDamage[i].gameObject.tag == "Enemy") enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(10);
                     if (enemiesToDamage[i].gameObject.tag == "Ghul") enemiesToDamage[i].GetComponent<GhulMov>().takeDamageGhul(10);
                     if (enemiesToDamage[i].gameObject.tag == "Angel") enemiesToDamage[i].GetComponent<AngelMov>().takeDamage(10);
+                    if (enemiesToDamage[i].gameObject.tag == "Boss") enemiesToDamage[i].GetComponent<Boss>().takeDamage(10);
                 }
                 animator.SetBool("IsKicking", true);
                 timeBtwKick = startTimeBtwKick;
@@ -183,13 +185,6 @@ public class PlayerMov : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         windAnim.SetBool("PlayerDoubleJump", false);
         gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
-    }
-
-    private IEnumerator Crouch()
-    {
-        
-        yield return new WaitForSeconds(0.2f);
-        
     }
 
     public bool getPlayerFaceRight()

@@ -17,7 +17,7 @@ public class PlayerSpell : Spell
 
     private bool canUseFire = false;
     public bool CanUseFire { get { return canUseFire; } set { canUseFire = value; } }
-    private bool canUseFrost = false;
+    private bool canUseFrost = true;
     public bool CanUseFrost { get { return canUseFrost; } set { canUseFrost = value; } }
     private bool canUseEarth = false;
     public bool CanUseEarth { get { return canUseEarth; } set { canUseEarth = value; } }

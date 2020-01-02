@@ -67,13 +67,21 @@ public class ProjectileMov : MonoBehaviour
             //if (collision.gameObject.GetComponent<FoeMov>().Health <= 0)
            // collision.gameObject.GetComponent<FoeMov>().onFire = true;
         }
+        else if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<Boss>().takeDamage(20);
+        }
         if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<FoeMov>().takeDamage(5);
             if(collision.gameObject.GetComponent<FoeMov>().freezeCounter==0)
             collision.gameObject.GetComponent<FoeMov>().isFrozen = true;
+        }else if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<Boss>().takeDamage(5);
+            if (collision.gameObject.GetComponent<Boss>().freezeCounter == 0) collision.gameObject.GetComponent<Boss>().isFrozen = true;
         }
-        if(gameObject.tag == "Fireball" && collision.gameObject.tag == "Ghul")
+        if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Ghul")
         {
             collision.gameObject.GetComponent<GhulMov>().takeDamageGhul(20);
         }
@@ -85,7 +93,11 @@ public class ProjectileMov : MonoBehaviour
         {
             collision.gameObject.GetComponent<FoeMov>().takeDamage(30);
         }
-        if(gameObject.tag == "EnemyFireBall" && collision.gameObject.tag == "Frostball")
+        else if (gameObject.tag == "Water" && collision.gameObject.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<Boss>().takeDamage(30);
+        }
+        if (gameObject.tag == "EnemyFireBall" && collision.gameObject.tag == "Frostball")
         {
             Instantiate(waterExplosion, gameObject.transform.position, gameObject.transform.rotation);
         }
