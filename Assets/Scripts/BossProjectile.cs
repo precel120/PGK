@@ -10,7 +10,6 @@ public class BossProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boss = GetComponent<Boss>();
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
         rigidbody.velocity = transform.right * projectileSpeed;
     }
@@ -20,13 +19,20 @@ public class BossProjectile : MonoBehaviour
     {
 
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>().Health -= 20;
+            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if (collision.gameObject.CompareTag("WallObstacle") || collision.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("EarthSpell") || collision.gameObject.CompareTag("Fireball") || collision.gameObject.CompareTag("Water") || collision.gameObject.CompareTag("Frostball"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

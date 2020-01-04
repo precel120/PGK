@@ -12,11 +12,16 @@ public class Boss : MonoBehaviour
     public float Health { get { return health; } set { health = value; } }
     private Animator animator;
     public bool FaceRight;
+
+    public Transform fireSpot;
+    public GameObject projectile;
+    private float spellCooldownTimer = 0.0f;
+    public float spellCooldown;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 20f;
+        health = 100f;
         FaceRight = true;
     }
 
@@ -30,7 +35,15 @@ public class Boss : MonoBehaviour
         }
         else if (isFrozen && freezeCounter == 0)
         {
-            StartCoroutine(freeze());
+            StartCoroutine(Freeze());
+        }
+        if (Health >= 50)
+        {
+            if (Time.time > spellCooldownTimer)
+            {
+                StartCoroutine(Shooting());
+                spellCooldownTimer = Time.time + spellCooldown;
+            }
         }
     }
 
@@ -38,7 +51,7 @@ public class Boss : MonoBehaviour
     {
         if (health - amount <= 0)
         {
-            StartCoroutine(death());
+            StartCoroutine(Death());
         }
         else health -= amount;
     }
@@ -52,7 +65,7 @@ public class Boss : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
-    IEnumerator freeze()
+    IEnumerator Freeze()
     {
         //foeSpell.enabled = false;
         animator.enabled = false;
@@ -62,11 +75,27 @@ public class Boss : MonoBehaviour
         isFrozen = true;
     }
 
-    IEnumerator death()
+    IEnumerator Death()
     {
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
         Instantiate(earthScroll, transform.position, Quaternion.identity);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
+        }
+    }
+    IEnumerator Shooting()
+    {
+        animator.SetBool("Fire", true);
+        Instantiate(projectile, fireSpot.position, fireSpot.rotation);
+        yield return new WaitForSeconds(0.5f);
+        animator.SetBool("Fire", false);
+
     }
 }

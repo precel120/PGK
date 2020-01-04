@@ -7,6 +7,7 @@ public class BossTrigger : MonoBehaviour
 {
     public GameObject boss;
     public GameObject wall;
+    public GameObject bossHP;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,7 @@ public class BossTrigger : MonoBehaviour
         {
             boss.SetActive(true);
             wall.SetActive(true);
+            bossHP.SetActive(true);
         }
     }
 }
