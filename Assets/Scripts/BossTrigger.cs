@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Tilemaps;
+using Cinemachine;
 
 public class BossTrigger : MonoBehaviour
 {
     public GameObject boss;
     public GameObject wall;
     public GameObject bossHP;
+    public CinemachineVirtualCamera vcam;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +21,15 @@ public class BossTrigger : MonoBehaviour
     {
 
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             boss.SetActive(true);
             wall.SetActive(true);
             bossHP.SetActive(true);
+            gameObject.SetActive(false);
+            vcam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 20;
         }
     }
 }

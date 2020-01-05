@@ -6,8 +6,10 @@ public class BossShield : MonoBehaviour
 {
     [SerializeField]
     Transform rotationCenter;
+
     [SerializeField]
     float rotationRadius = 2f, angularSpeed = 3f;
+
     float posX, posY;
     public float angle;
     private float baseAngle;

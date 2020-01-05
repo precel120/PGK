@@ -7,6 +7,7 @@ public class BossProjectile : MonoBehaviour
     public float projectileSpeed;
     private Rigidbody2D rigidbody;
     private Boss boss;
+    public int dmgAmount;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +24,10 @@ public class BossProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
+            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(dmgAmount);
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("WallObstacle") || collision.gameObject.CompareTag("Ground"))
+        else if (collision.gameObject.CompareTag("WallObstacle"))
         {
             Destroy(gameObject);
         }

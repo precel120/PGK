@@ -153,3 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 8
+  dmgAmount: 10

@@ -7,6 +7,8 @@ public class Boss : MonoBehaviour
     public float Speed;
     private float health;
     public bool isFrozen;
+    public bool canShoot;
+    public bool canHugeShoot;
     public int freezeCounter = 0;
     public GameObject earthScroll;
     public float Health { get { return health; } set { health = value; } }
@@ -14,15 +16,23 @@ public class Boss : MonoBehaviour
     public bool FaceRight;
 
     public Transform fireSpot;
+    public Transform hugeFireSpot;
     public GameObject projectile;
+    public GameObject hugeProjectile;
     private float spellCooldownTimer = 0.0f;
     public float spellCooldown;
+    private float hugeSpellCooldownTimer = 0.0f;
+    public float hugeSpellCooldown;
+
+    public Transform player;
+    public ShieldHandler shieldHandler;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 100f;
+        health = 55f;
         FaceRight = true;
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -31,6 +41,7 @@ public class Boss : MonoBehaviour
         if (!isFrozen || freezeCounter !=0)
         {
             animator.enabled = true;
+            canShoot = true;
             Speed = 2f;
         }
         else if (isFrozen && freezeCounter == 0)
@@ -39,11 +50,20 @@ public class Boss : MonoBehaviour
         }
         if (Health >= 50)
         {
-            if (Time.time > spellCooldownTimer)
+            if (Time.time > spellCooldownTimer && canShoot)
             {
                 StartCoroutine(Shooting());
                 spellCooldownTimer = Time.time + spellCooldown;
+            }else if(Time.time > hugeSpellCooldownTimer)
+            {
+                StartCoroutine(HugeShooting());
+                hugeSpellCooldownTimer = Time.time + hugeSpellCooldown;
             }
+        }else if (Health < 50 && Health > 0)
+        {
+            shieldHandler.removeShield();
+            transform.position = Vector3.MoveTowards(transform.position, player.position, Speed * Time.deltaTime);
+            Flip();
         }
     }
 
@@ -56,18 +76,22 @@ public class Boss : MonoBehaviour
         else health -= amount;
     }
 
-    void Flip(float horizontal)
+    void Flip()
     {
-        if (horizontal > 0 && !FaceRight || horizontal < 0 && FaceRight)
+        Vector3 distance = gameObject.transform.position - player.position;
+        if (distance.x > 0 && FaceRight)
         {
             FaceRight = !FaceRight;
-
+            transform.Rotate(0f, 180f, 0f);
+        }else if (distance.x < 0 && !FaceRight)
+        {
+            FaceRight = !FaceRight;
             transform.Rotate(0f, 180f, 0f);
         }
     }
     IEnumerator Freeze()
     {
-        //foeSpell.enabled = false;
+        canShoot = false;
         animator.enabled = false;
         Speed = 0f;
         yield return new WaitForSeconds(1.5f);
@@ -96,6 +120,25 @@ public class Boss : MonoBehaviour
         Instantiate(projectile, fireSpot.position, fireSpot.rotation);
         yield return new WaitForSeconds(0.5f);
         animator.SetBool("Fire", false);
+    }
 
+    IEnumerator HugeShooting()
+    {
+        canShoot = false;
+        animator.SetBool("Fire", true);
+        Instantiate(hugeProjectile, hugeFireSpot.position, hugeFireSpot.rotation);
+        yield return new WaitForSeconds(2f);
+        animator.SetBool("Fire", false);
+        canShoot = true;
+    }
+
+    IEnumerator Spawn()
+    {
+        //canHugeShoot = false;
+        canShoot = false;
+        yield return new WaitForSeconds(3f);
+        canShoot = true;
+        //yield return new WaitForSeconds(5f);
+        //canHugeShoot = true;
     }
 }
