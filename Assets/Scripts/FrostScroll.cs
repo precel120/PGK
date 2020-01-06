@@ -1,20 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FrostScroll : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Image locked;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,6 +14,7 @@ public class FrostScroll : MonoBehaviour
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseFrost = true;
             GameObject.FindObjectOfType<ChangeText>().TextChange("Frostball - 'K'");
+            locked.enabled = false;
         }
     }
 }

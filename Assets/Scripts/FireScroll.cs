@@ -1,20 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FireScroll : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Image locked;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,6 +14,7 @@ public class FireScroll : MonoBehaviour
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseFire = true;
             GameObject.FindObjectOfType<ChangeText>().TextChange("Fireball - 'H'");
+            locked.enabled = false;
         }
     }
 }

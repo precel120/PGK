@@ -21,6 +21,8 @@ TagManager:
   - Tree
   - Ghul
   - Angel
+  - Boss
+  - BossProjectile
   layers:
   - Default
   - TransparentFX

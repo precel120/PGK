@@ -23,6 +23,8 @@ public class PlayerMov : MonoBehaviour
     private float timeBtwAttack;
     private float timeBtwKick;
     [SerializeField] private int extraJump;
+    private float fallMultiplier = 2.5f;
+    private float lowJumpMultiplier = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +49,17 @@ public class PlayerMov : MonoBehaviour
             extraJump = 2;
         }
 
-        if (Input.GetKeyDown("space") && extraJump > 0)
+        if (Input.GetKeyDown("space") || Input.GetKeyDown("w") && extraJump > 0)
         {
             Jump();
+        }
+
+        if(_rigidbody2D.velocity.y < 0)
+        {
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
+        } else if(_rigidbody2D.velocity.y > 0 && !Input.GetButton ("Jump"))
+        {
+            _rigidbody2D.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
         if (timeBtwAttack <= 0)
@@ -106,6 +116,18 @@ public class PlayerMov : MonoBehaviour
             capsuleCollider2D.offset /= 2.5f;
             Speed = 10;
         }
+
+
+        if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            animator.SetBool("Jump", true);
+        }
+        else
+        {
+            animator.SetBool("Jump", false);
+            windAnim.SetBool("PlayerDoubleJump", false);
+            gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     void Move(float horizontal)
@@ -146,31 +168,16 @@ public class PlayerMov : MonoBehaviour
         if (feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
-            _rigidbody2D.velocity += jumpVelocity;
-            animator.SetBool("Jump", true);
+            _rigidbody2D.velocity = Vector2.up * jumpVelocity;
         }
         else
         {
             Vector2 jumpVelocity = new Vector2(0f, JumpHeight);
-            _rigidbody2D.velocity += jumpVelocity;
-            animator.SetBool("Jump", true);
+            _rigidbody2D.velocity = Vector2.up * jumpVelocity;
             extraJump = 0;
         }
 
         extraJump--;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            animator.SetBool("Jump", false);
-            if (feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
-            {
-                windAnim.SetBool("PlayerDoubleJump", false);
-                gameObject.transform.Find("Wind").GetComponent<SpriteRenderer>().enabled = false;
-            }
-        }
     }
 
     private void OnDrawGizmosSelected()

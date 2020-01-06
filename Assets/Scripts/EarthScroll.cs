@@ -1,20 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EarthScroll : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Image locked;
+
+    private void Start()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -22,6 +18,7 @@ public class EarthScroll : MonoBehaviour
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseEarth = true;
             GameObject.FindObjectOfType<ChangeText>().TextChange("EarthBall - 'U'");
+            locked.enabled = false;
         }
     }
 }
