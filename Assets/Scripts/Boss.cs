@@ -6,12 +6,9 @@ public class Boss : MonoBehaviour
 {
     public float Speed;
     private float health;
-    public bool isFrozen;
+    public float Health { get { return health; } set { health = value; } }
     public bool canShoot;
     public bool canHugeShoot;
-    public int freezeCounter = 0;
-    public GameObject earthScroll;
-    public float Health { get { return health; } set { health = value; } }
     private Animator animator;
     public bool FaceRight;
 
@@ -24,46 +21,45 @@ public class Boss : MonoBehaviour
     private float hugeSpellCooldownTimer = 0.0f;
     public float hugeSpellCooldown;
 
-    public Transform player;
+    public GameObject player;
     public ShieldHandler shieldHandler;
+
+    public GameObject closeWall;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 55f;
+        health = 500f;
         FaceRight = true;
+        canShoot = false;
+        canHugeShoot = false;
         StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isFrozen || freezeCounter !=0)
-        {
-            animator.enabled = true;
-            canShoot = true;
-            Speed = 2f;
-        }
-        else if (isFrozen && freezeCounter == 0)
-        {
-            StartCoroutine(Freeze());
-        }
-        if (Health >= 50)
+        if (Health >= 400)
         {
             if (Time.time > spellCooldownTimer && canShoot)
             {
                 StartCoroutine(Shooting());
                 spellCooldownTimer = Time.time + spellCooldown;
-            }else if(Time.time > hugeSpellCooldownTimer)
+            }else if(Time.time > hugeSpellCooldownTimer && canHugeShoot)
             {
                 StartCoroutine(HugeShooting());
                 hugeSpellCooldownTimer = Time.time + hugeSpellCooldown;
             }
-        }else if (Health < 50 && Health > 0)
+        }else if (Health < 400 && Health > 0)
         {
             shieldHandler.removeShield();
-            transform.position = Vector3.MoveTowards(transform.position, player.position, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.deltaTime);
             Flip();
+            float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            if(distanceToPlayer <= 10)
+            {
+                StartCoroutine(Melee());
+            }
         }
     }
 
@@ -78,7 +74,7 @@ public class Boss : MonoBehaviour
 
     void Flip()
     {
-        Vector3 distance = gameObject.transform.position - player.position;
+        Vector3 distance = gameObject.transform.position - player.transform.position;
         if (distance.x > 0 && FaceRight)
         {
             FaceRight = !FaceRight;
@@ -89,29 +85,21 @@ public class Boss : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
-    IEnumerator Freeze()
-    {
-        canShoot = false;
-        animator.enabled = false;
-        Speed = 0f;
-        yield return new WaitForSeconds(1.5f);
-        freezeCounter = 1;
-        isFrozen = true;
-    }
 
     IEnumerator Death()
     {
+        health = 0;
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
-        Instantiate(earthScroll, transform.position, Quaternion.identity);
+        closeWall.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
+            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
         }
     }
     IEnumerator Shooting()
@@ -127,18 +115,47 @@ public class Boss : MonoBehaviour
         canShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(hugeProjectile, hugeFireSpot.position, hugeFireSpot.rotation);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         animator.SetBool("Fire", false);
+        yield return new WaitForSeconds(2f);
         canShoot = true;
     }
 
     IEnumerator Spawn()
     {
-        //canHugeShoot = false;
+        canHugeShoot = false;
         canShoot = false;
         yield return new WaitForSeconds(3f);
         canShoot = true;
-        //yield return new WaitForSeconds(5f);
-        //canHugeShoot = true;
+        yield return new WaitForSeconds(5f);
+        canHugeShoot = true;
+    }
+
+    IEnumerator Melee()
+    {
+        int choice = Random.Range(0, 3);
+        switch (choice)
+        {
+            case 0:
+                animator.SetBool("useSword", true);
+                yield return new WaitForSeconds(1f);
+                player.GetComponent<PlayerHealth>().takeDamage(20);
+                animator.SetBool("useSword", false);
+                break;
+            case 1:
+                animator.SetBool("Uppercut", true);
+                yield return new WaitForSeconds(1f);
+                player.GetComponent<PlayerHealth>().takeDamage(10);
+                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 20);
+                animator.SetBool("Uppercut", false);
+                break;
+            case 2:
+                animator.SetBool("useFist", true);
+                yield return new WaitForSeconds(1f);
+                player.GetComponent<PlayerHealth>().takeDamage(5);
+                player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20);
+                animator.SetBool("useFist", false);
+                break;
+        }
     }
 }

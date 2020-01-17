@@ -79,7 +79,6 @@ public class ProjectileMov : MonoBehaviour
         }else if (gameObject.tag == "Frostball" && collision.gameObject.tag == "Boss")
         {
             collision.gameObject.GetComponent<Boss>().takeDamage(5);
-            if (collision.gameObject.GetComponent<Boss>().freezeCounter == 0) collision.gameObject.GetComponent<Boss>().isFrozen = true;
         }
         if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Ghul")
         {

@@ -11,12 +11,6 @@ public class HealthBar : MonoBehaviour
     public GameObject player;
     public bool isPlayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +20,7 @@ public class HealthBar : MonoBehaviour
     private void HandleBar()
     {
         if(isPlayer) content.fillAmount = MapHealth(player.GetComponent<PlayerHealth>().Health, 0, 100, 0, 1);
-        else content.fillAmount = MapHealth(player.GetComponent<Boss>().Health, 0, 100, 0, 1);
+        else content.fillAmount = MapHealth(player.GetComponent<Boss>().Health, 0, 500, 0, 1);
     }
 
     private float MapHealth(float value, float inMin, float inMax, float outMin, float outMax)
