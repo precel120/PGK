@@ -151,7 +151,7 @@ public class Boss : MonoBehaviour
 
     IEnumerator Melee()
     {
-        int choice = Random.Range(2, 3);
+        int choice = Random.Range(0, 3);
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,playerLayer);
         foreach(Collider2D play in hitPlayer)
         {
