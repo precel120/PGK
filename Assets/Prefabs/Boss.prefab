@@ -130,7 +130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4461627745183767277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.19, y: -0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7585242407063439207}
@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 2217789880247543297}
   - component: {fileID: 440979050190952007}
   - component: {fileID: 4541026342057353961}
-  - component: {fileID: 7027888082708715489}
   - component: {fileID: 1591387170}
+  - component: {fileID: 693393125559057837}
   m_Layer: 10
   m_Name: Boss
   m_TagString: Boss
@@ -266,22 +266,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &7027888082708715489
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4775672937944097326}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.025852203, y: -0.70277405}
-  m_Size: {x: 1.3735275, y: 2.5410004}
-  m_Direction: 0
 --- !u!114 &1591387170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,8 +281,6 @@ MonoBehaviour:
   Speed: 4
   canShoot: 0
   canHugeShoot: 0
-  earthScroll: {fileID: 8304428810779678239, guid: d8bae37650ed95445b3b3325a3009066,
-    type: 3}
   FaceRight: 0
   fireSpot: {fileID: 297376417295865397}
   hugeFireSpot: {fileID: 1402527738}
@@ -310,6 +292,38 @@ MonoBehaviour:
   hugeSpellCooldown: 10
   player: {fileID: 0}
   shieldHandler: {fileID: 1786722625}
+  closeWall: {fileID: 0}
+  attackPoint: {fileID: 2369194753825105412}
+  attackRange: 0.57
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!61 &693393125559057837
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775672937944097326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.014036417, y: -0.69516563}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5, y: 5}
+    newSize: {x: 3.5, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.7304876, y: 2.2895522}
+  m_EdgeRadius: 0
 --- !u!1001 &3650156126703228449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -317,6 +331,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7585242407063439207}
     m_Modifications:
+    - target: {fileID: 3650156124921114470, guid: a4a57d9ae48d660449163f35320b5dc5,
+        type: 3}
+      propertyPath: m_Name
+      value: FireballShield
+      objectReference: {fileID: 0}
     - target: {fileID: 3650156124921114465, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -372,37 +391,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156124921114470, guid: a4a57d9ae48d660449163f35320b5dc5,
-        type: 3}
-      propertyPath: m_Name
-      value: FireballShield
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationCenter
       value: 
       objectReference: {fileID: 1160977365}
-    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationRadius
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
-        type: 3}
-      propertyPath: angularSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
-        type: 3}
-      propertyPath: rotationCenter
-      value: 
-      objectReference: {fileID: 1160977365}
-    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
-        type: 3}
-      propertyPath: rotationRadius
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: angularSpeed
       value: 3
@@ -422,32 +421,47 @@ PrefabInstance:
       propertyPath: angularSpeed
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationCenter
       value: 
       objectReference: {fileID: 1160977365}
-    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationRadius
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: angularSpeed
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationCenter
       value: 
       objectReference: {fileID: 1160977365}
-    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: rotationRadius
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3650156125943399113, guid: a4a57d9ae48d660449163f35320b5dc5,
+    - target: {fileID: 3650156125731098862, guid: a4a57d9ae48d660449163f35320b5dc5,
+        type: 3}
+      propertyPath: angularSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
+        type: 3}
+      propertyPath: rotationCenter
+      value: 
+      objectReference: {fileID: 1160977365}
+    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
+        type: 3}
+      propertyPath: rotationRadius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3650156125195421134, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: angularSpeed
       value: 3

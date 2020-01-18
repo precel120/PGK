@@ -25,6 +25,12 @@ public class Boss : MonoBehaviour
     public ShieldHandler shieldHandler;
 
     public GameObject closeWall;
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask playerLayer;
+    private float lastAttackTime = 0;
+    public float attackDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,9 +62,20 @@ public class Boss : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.deltaTime);
             Flip();
             float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
-            if(distanceToPlayer <= 10)
+            if(distanceToPlayer <= 3)
             {
-                StartCoroutine(Melee());
+                if (Time.time > lastAttackTime + attackDelay)
+                {
+                    StartCoroutine(Melee());
+                    lastAttackTime = Time.time;
+                }
+            }else if (distanceToPlayer > 12)
+            {
+                if (Time.time > spellCooldownTimer && canShoot)
+                {
+                    StartCoroutine(Shooting());
+                    spellCooldownTimer = Time.time + spellCooldown;
+                }
             }
         }
     }
@@ -99,7 +116,8 @@ public class Boss : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
+            if(Health>=400) collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
+            else collision.gameObject.GetComponent<PlayerHealth>().takeDamage(5);
         }
     }
     IEnumerator Shooting()
@@ -133,29 +151,43 @@ public class Boss : MonoBehaviour
 
     IEnumerator Melee()
     {
-        int choice = Random.Range(0, 3);
-        switch (choice)
+        int choice = Random.Range(2, 3);
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,playerLayer);
+        foreach(Collider2D play in hitPlayer)
         {
-            case 0:
-                animator.SetBool("useSword", true);
-                yield return new WaitForSeconds(1f);
-                player.GetComponent<PlayerHealth>().takeDamage(20);
-                animator.SetBool("useSword", false);
-                break;
-            case 1:
-                animator.SetBool("Uppercut", true);
-                yield return new WaitForSeconds(1f);
-                player.GetComponent<PlayerHealth>().takeDamage(10);
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 20);
-                animator.SetBool("Uppercut", false);
-                break;
-            case 2:
-                animator.SetBool("useFist", true);
-                yield return new WaitForSeconds(1f);
-                player.GetComponent<PlayerHealth>().takeDamage(5);
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20);
-                animator.SetBool("useFist", false);
-                break;
+            switch (choice)
+            {
+                case 0:
+                    Debug.Log("miecz");
+                    animator.SetBool("useSword", true);
+                    yield return new WaitForSeconds(0.5f);
+                    player.GetComponent<PlayerHealth>().takeDamage(20);
+                    animator.SetBool("useSword", false);
+                    break;
+                case 1:
+                    Debug.Log("podb");
+                    animator.SetBool("Uppercut", true);
+                    yield return new WaitForSeconds(0.5f);
+                    player.GetComponent<PlayerHealth>().takeDamage(10);
+                    animator.SetBool("Uppercut", false);
+                    break;
+                case 2:
+                    Debug.Log("fist");
+                    animator.SetBool("useFist", true);
+                    yield return new WaitForSeconds(0.5f);
+                    player.GetComponent<PlayerHealth>().takeDamage(5);
+                    animator.SetBool("useFist", false);
+                    break;
+            }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
