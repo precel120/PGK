@@ -7,6 +7,7 @@ public class Parallax : MonoBehaviour
     private float lenght, startPos;
     public GameObject cam;
     public float parallaxEffect;
+    public bool isUnderground;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,16 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //if(transform.position.x - cam.transform.position.x < 100)
+        //{
+        //    float dist = (cam.transform.position.x * parallaxEffect);
+        //    float temp = (cam.transform.position.x * (1 - parallaxEffect));
+
+        //    transform.position = new Vector3(startPos + dist, transform.position.y, transform.position.z);
+
+        //    if (temp > startPos + lenght) startPos += lenght;
+        //    else if (temp < startPos - lenght) startPos -= lenght;
+        //}
         float dist = (cam.transform.position.x * parallaxEffect);
         float temp = (cam.transform.position.x * (1 - parallaxEffect));
 
