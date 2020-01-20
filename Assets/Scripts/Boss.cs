@@ -25,6 +25,7 @@ public class Boss : MonoBehaviour
     public ShieldHandler shieldHandler;
 
     public GameObject closeWall;
+    public GameObject hpBar;
 
     public Transform attackPoint;
     public float attackRange = 0.5f;
@@ -35,7 +36,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 500f;
+        health = 150f;
         FaceRight = true;
         canShoot = false;
         canHugeShoot = false;
@@ -45,7 +46,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Health >= 400)
+        if (Health > 200)
         {
             if (Time.time > spellCooldownTimer && canShoot)
             {
@@ -56,7 +57,7 @@ public class Boss : MonoBehaviour
                 StartCoroutine(HugeShooting());
                 hugeSpellCooldownTimer = Time.time + hugeSpellCooldown;
             }
-        }else if (Health < 400 && Health > 0)
+        }else if (Health <= 200 && Health > 0)
         {
             shieldHandler.removeShield();
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.deltaTime);
@@ -64,12 +65,12 @@ public class Boss : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
             if(distanceToPlayer <= 3)
             {
-                if (Time.time > lastAttackTime + attackDelay)
+                if (Time.time > lastAttackTime)
                 {
                     StartCoroutine(Melee());
-                    lastAttackTime = Time.time;
+                    lastAttackTime = Time.time + attackDelay;
                 }
-            }else if (distanceToPlayer > 12)
+            }else if (distanceToPlayer > 6)
             {
                 if (Time.time > spellCooldownTimer && canShoot)
                 {
@@ -108,15 +109,20 @@ public class Boss : MonoBehaviour
         health = 0;
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
+        canHugeShoot = false;
+        canShoot = false;
+        Speed = 0;
         closeWall.SetActive(false);
+        hpBar.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            if(Health>=400) collision.gameObject.GetComponent<PlayerHealth>().takeDamage(10);
+            if(Health > 200) collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
             else collision.gameObject.GetComponent<PlayerHealth>().takeDamage(5);
         }
     }
@@ -133,7 +139,7 @@ public class Boss : MonoBehaviour
         canShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(hugeProjectile, hugeFireSpot.position, hugeFireSpot.rotation);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         animator.SetBool("Fire", false);
         yield return new WaitForSeconds(2f);
         canShoot = true;
@@ -151,9 +157,9 @@ public class Boss : MonoBehaviour
 
     IEnumerator Melee()
     {
-        int choice = Random.Range(0, 3);
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position,attackRange,playerLayer);
-        foreach(Collider2D play in hitPlayer)
+        int choice = Random.Range(0, 2);
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        foreach (Collider2D play in hitPlayer)
         {
             switch (choice)
             {
@@ -170,13 +176,6 @@ public class Boss : MonoBehaviour
                     yield return new WaitForSeconds(0.5f);
                     player.GetComponent<PlayerHealth>().takeDamage(10);
                     animator.SetBool("Uppercut", false);
-                    break;
-                case 2:
-                    Debug.Log("fist");
-                    animator.SetBool("useFist", true);
-                    yield return new WaitForSeconds(0.5f);
-                    player.GetComponent<PlayerHealth>().takeDamage(5);
-                    animator.SetBool("useFist", false);
                     break;
             }
         }

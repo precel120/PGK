@@ -18,7 +18,7 @@ public class ShieldHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (shieldCounter == 7)
+        if (shieldCounter == 6)
         {
             StartCoroutine(shieldDestroyed());
         }
@@ -40,14 +40,18 @@ public class ShieldHandler : MonoBehaviour
         shieldCounter = 0;
         circleCollider.enabled = false;
         boss.canShoot = false;
+        boss.canHugeShoot = false;
         yield return new WaitForSeconds(4f);
+        circleCollider.enabled = true;
         foreach (Transform child in transform)
         {
             child.gameObject.GetComponent<BossShield>().resetAngle();
             child.gameObject.SetActive(true);
-            circleCollider.enabled = true;
-            boss.canShoot = true;
         }
+        yield return new WaitForSeconds(1.5f);
+        boss.canShoot = true;
+        yield return new WaitForSeconds(2.5f);
+        boss.canHugeShoot = true;
     }
 
     public void removeShield()

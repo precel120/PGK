@@ -4890,7 +4890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1821a4bfd643e349bb573ce6759bac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 5
+  projectileSpeed: 6
   waterPrefab: {fileID: 903866671471962032, guid: e3e57bc6c08a93344bc830d62f5c1fd3,
     type: 3}
   rb: {fileID: 5310852852769045881}
@@ -4902,6 +4902,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 162366890067911373}
     m_Modifications:
+    - target: {fileID: 8349481806098647440, guid: a1df64e6225a0f447a224a8548dfa892,
+        type: 3}
+      propertyPath: m_Name
+      value: FreezeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 664242068481298523, guid: a1df64e6225a0f447a224a8548dfa892,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 664242068481298523, guid: a1df64e6225a0f447a224a8548dfa892,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 5068026660854067511, guid: a1df64e6225a0f447a224a8548dfa892,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4956,21 +4971,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8349481806098647440, guid: a1df64e6225a0f447a224a8548dfa892,
-        type: 3}
-      propertyPath: m_Name
-      value: FreezeEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 664242068481298523, guid: a1df64e6225a0f447a224a8548dfa892,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 664242068481298523, guid: a1df64e6225a0f447a224a8548dfa892,
-        type: 3}
-      propertyPath: ShapeModule.m_Position.y
-      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1df64e6225a0f447a224a8548dfa892, type: 3}

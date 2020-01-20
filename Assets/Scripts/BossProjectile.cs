@@ -31,7 +31,7 @@ public class BossProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("EarthSpell") || collision.gameObject.CompareTag("Fireball") || collision.gameObject.CompareTag("Water") || collision.gameObject.CompareTag("Frostball"))
+        else if (collision.gameObject.CompareTag("Fireball") || collision.gameObject.CompareTag("Water") || collision.gameObject.CompareTag("Frostball"))
         {
             Destroy(collision.gameObject);
         }

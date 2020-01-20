@@ -152,5 +152,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba0da78f0e3b9941a6f0c00dd4f8d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 8.5
+  projectileSpeed: 8
   dmgAmount: 10
