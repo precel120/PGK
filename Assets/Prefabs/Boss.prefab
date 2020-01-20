@@ -333,6 +333,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7585242407063439207}
     m_Modifications:
+    - target: {fileID: 3650156124921114470, guid: a4a57d9ae48d660449163f35320b5dc5,
+        type: 3}
+      propertyPath: m_Name
+      value: FireballShield
+      objectReference: {fileID: 0}
     - target: {fileID: 3650156124921114465, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -387,11 +392,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3650156124921114470, guid: a4a57d9ae48d660449163f35320b5dc5,
-        type: 3}
-      propertyPath: m_Name
-      value: FireballShield
       objectReference: {fileID: 0}
     - target: {fileID: 3650156126701268609, guid: a4a57d9ae48d660449163f35320b5dc5,
         type: 3}
