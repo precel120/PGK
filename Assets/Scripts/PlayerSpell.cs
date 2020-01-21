@@ -15,11 +15,11 @@ public class PlayerSpell : Spell
     private float earthCooldown;
     private float earthCooldownDuration = 0.0f;
 
-    private bool canUseFire = true;
+    private bool canUseFire = false;
     public bool CanUseFire { get { return canUseFire; } set { canUseFire = value; } }
-    private bool canUseFrost = true;
+    private bool canUseFrost = false;
     public bool CanUseFrost { get { return canUseFrost; } set { canUseFrost = value; } }
-    private bool canUseEarth = true;
+    private bool canUseEarth = false;
     public bool CanUseEarth { get { return canUseEarth; } set { canUseEarth = value; } }
 
     private FireCooldownMeter fireCooldownMeter;

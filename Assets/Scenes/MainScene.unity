@@ -98255,6 +98255,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 549949267}
+    - target: {fileID: 1591387170, guid: ffd7d62701520a64ea3f62b58f66db4d, type: 3}
+      propertyPath: hugeSpellCooldown
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd7d62701520a64ea3f62b58f66db4d, type: 3}
 --- !u!1001 &1748094622

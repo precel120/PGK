@@ -36,7 +36,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 250f;
+        health = 350f;
         FaceRight = true;
         canShoot = false;
         canHugeShoot = false;
