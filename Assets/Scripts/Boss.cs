@@ -36,7 +36,7 @@ public class Boss : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        health = 300f;
+        health = 250f;
         FaceRight = true;
         canShoot = false;
         canHugeShoot = false;
@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Health > 200)
+        if (Health > 250)
         {
             if (Time.time > spellCooldownTimer && canShoot)
             {
@@ -57,20 +57,20 @@ public class Boss : MonoBehaviour
                 StartCoroutine(HugeShooting());
                 hugeSpellCooldownTimer = Time.time + hugeSpellCooldown;
             }
-        }else if (Health <= 200 && Health > 0)
+        }else if (Health <= 250 && Health > 0)
         {
             shieldHandler.removeShield();
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.deltaTime);
             Flip();
             float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
-            if(distanceToPlayer <= 3)
+            if(distanceToPlayer <= 4)
             {
                 if (Time.time > lastAttackTime)
                 {
                     StartCoroutine(Melee());
                     lastAttackTime = Time.time + attackDelay;
                 }
-            }else if (distanceToPlayer > 6)
+            }else if (distanceToPlayer > 8)
             {
                 if (Time.time > spellCooldownTimer && canShoot)
                 {
@@ -122,16 +122,18 @@ public class Boss : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            if(Health > 200) collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
+            if(Health > 250) collision.gameObject.GetComponent<PlayerHealth>().takeDamage(15);
             else collision.gameObject.GetComponent<PlayerHealth>().takeDamage(5);
         }
     }
     IEnumerator Shooting()
     {
+        canHugeShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(projectile, fireSpot.position, fireSpot.rotation);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         animator.SetBool("Fire", false);
+        canHugeShoot = true;
     }
 
     IEnumerator HugeShooting()
@@ -139,7 +141,7 @@ public class Boss : MonoBehaviour
         canShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(hugeProjectile, hugeFireSpot.position, hugeFireSpot.rotation);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.6f);
         animator.SetBool("Fire", false);
         yield return new WaitForSeconds(2f);
         canShoot = true;
@@ -149,9 +151,9 @@ public class Boss : MonoBehaviour
     {
         canHugeShoot = false;
         canShoot = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         canShoot = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         canHugeShoot = true;
     }
 
@@ -164,14 +166,12 @@ public class Boss : MonoBehaviour
             switch (choice)
             {
                 case 0:
-                    Debug.Log("miecz");
                     animator.SetBool("useSword", true);
                     yield return new WaitForSeconds(0.5f);
                     player.GetComponent<PlayerHealth>().takeDamage(20);
                     animator.SetBool("useSword", false);
                     break;
                 case 1:
-                    Debug.Log("podb");
                     animator.SetBool("Uppercut", true);
                     yield return new WaitForSeconds(0.5f);
                     player.GetComponent<PlayerHealth>().takeDamage(10);
