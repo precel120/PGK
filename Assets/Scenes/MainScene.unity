@@ -92333,7 +92333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807017801}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110.27, y: -83.08, z: -176.46875}
+  m_LocalPosition: {x: 111.43, y: -83.08, z: -176.46875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98191,7 +98191,7 @@ PrefabInstance:
     - target: {fileID: 7585242407063439207, guid: ffd7d62701520a64ea3f62b58f66db4d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 92.97
+      value: 93.19
       objectReference: {fileID: 0}
     - target: {fileID: 7585242407063439207, guid: ffd7d62701520a64ea3f62b58f66db4d,
         type: 3}
@@ -98257,7 +98257,11 @@ PrefabInstance:
       objectReference: {fileID: 549949267}
     - target: {fileID: 1591387170, guid: ffd7d62701520a64ea3f62b58f66db4d, type: 3}
       propertyPath: hugeSpellCooldown
-      value: 9
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1591387170, guid: ffd7d62701520a64ea3f62b58f66db4d, type: 3}
+      propertyPath: spellCooldown
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd7d62701520a64ea3f62b58f66db4d, type: 3}

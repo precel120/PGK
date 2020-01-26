@@ -131,7 +131,7 @@ public class Boss : MonoBehaviour
         canHugeShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(projectile, fireSpot.position, fireSpot.rotation);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.5f);
         animator.SetBool("Fire", false);
         canHugeShoot = true;
     }
@@ -141,19 +141,17 @@ public class Boss : MonoBehaviour
         canShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(hugeProjectile, hugeFireSpot.position, hugeFireSpot.rotation);
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.8f);
         animator.SetBool("Fire", false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         canShoot = true;
     }
 
     IEnumerator Spawn()
     {
-        canHugeShoot = false;
-        canShoot = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         canShoot = true;
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
         canHugeShoot = true;
     }
 
@@ -167,13 +165,13 @@ public class Boss : MonoBehaviour
             {
                 case 0:
                     animator.SetBool("useSword", true);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.6f);
                     player.GetComponent<PlayerHealth>().takeDamage(20);
                     animator.SetBool("useSword", false);
                     break;
                 case 1:
                     animator.SetBool("Uppercut", true);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.6f);
                     player.GetComponent<PlayerHealth>().takeDamage(10);
                     animator.SetBool("Uppercut", false);
                     break;

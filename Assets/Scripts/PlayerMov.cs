@@ -49,7 +49,7 @@ public class PlayerMov : MonoBehaviour
             extraJump = 2;
         }
 
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("w") && extraJump > 0)
+        if (Input.GetKeyDown("space") || Input.GetKeyDown("w")  && extraJump > 0)
         {
             Jump();
         }
@@ -98,24 +98,6 @@ public class PlayerMov : MonoBehaviour
             }
             else animator.SetBool("IsKicking", false);
         }else timeBtwKick -= Time.deltaTime;
-
-        CapsuleCollider2D capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        CapsuleCollider2D tempCapsule = capsuleCollider2D;
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Speed = 0;
-            animator.SetBool("IsCrouching", true);
-            capsuleCollider2D.size *= 0.5f;
-            capsuleCollider2D.offset *= 2.5f;
-        }
-
-        if (Input.GetKeyUp(KeyCode.C))
-        {
-            animator.SetBool("IsCrouching", false);
-            capsuleCollider2D.size /= 0.5f;
-            capsuleCollider2D.offset /= 2.5f;
-            Speed = 10;
-        }
 
 
         if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
