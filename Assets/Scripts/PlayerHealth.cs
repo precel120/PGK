@@ -10,12 +10,15 @@ public class PlayerHealth : MonoBehaviour
     public int Health { get { return health; } set { health = value; } }
     private Animator animator;
     private SpriteRenderer sprite;
+    private AudioSource audioSource;
+    public AudioClip hurtClip;
     // Start is called before the first frame update
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         Health = 100;
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

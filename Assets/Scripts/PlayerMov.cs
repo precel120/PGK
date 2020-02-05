@@ -26,6 +26,11 @@ public class PlayerMov : MonoBehaviour
     private float fallMultiplier = 2.5f;
     private float lowJumpMultiplier = 1f;
 
+    //sound effects
+    public AudioClip walkClip;
+    private AudioSource playerSource;
+    public AudioSource meleeSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +39,7 @@ public class PlayerMov : MonoBehaviour
         feet = gameObject.GetComponent<BoxCollider2D>();
         faceRight = true;
         onGround = true;
+        playerSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -66,6 +72,8 @@ public class PlayerMov : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
+                Debug.Log(meleeSource.clip.ToString());
+                meleeSource.Play();
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
@@ -76,6 +84,7 @@ public class PlayerMov : MonoBehaviour
                 }
                 animator.SetBool("IsAttacking", true);
                 timeBtwAttack = startTimeBtwAttack;
+                //meleeSource.Stop();
             }
             else animator.SetBool("IsAttacking", false);
         }
@@ -114,6 +123,15 @@ public class PlayerMov : MonoBehaviour
 
     void Move(float horizontal)
     {
+        if (horizontal == 0)
+        {
+            playerSource.Stop();
+        }
+        else if(horizontal != 0 && !playerSource.isPlaying)
+        {
+            playerSource.clip = walkClip;
+            playerSource.Play();
+        } 
          _rigidbody2D.velocity = new Vector2(horizontal * Speed, _rigidbody2D.velocity.y);
         animator.SetFloat("Speed",Mathf.Abs(horizontal));
     }
