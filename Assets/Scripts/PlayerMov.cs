@@ -9,7 +9,6 @@ public class PlayerMov : MonoBehaviour
     public float Speed;
     public float JumpHeight;
     public float startTimeBtwAttack;
-    public float startTimeBtwKick;
     public Transform attackPos;
     public LayerMask whatisEnemies;
     public float attackRange;
@@ -21,13 +20,11 @@ public class PlayerMov : MonoBehaviour
     private Animator animator;
     [SerializeField] private Animator windAnim;
     private float timeBtwAttack;
-    private float timeBtwKick;
     [SerializeField] private int extraJump;
     private float fallMultiplier = 2.5f;
     private float lowJumpMultiplier = 1f;
 
     //sound effects
-    public AudioClip walkClip;
     private AudioSource playerSource;
     public AudioSource meleeSource;
 
@@ -72,8 +69,6 @@ public class PlayerMov : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J))
             {
-                Debug.Log(meleeSource.clip.ToString());
-                meleeSource.Play();
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
@@ -83,31 +78,12 @@ public class PlayerMov : MonoBehaviour
                     if (enemiesToDamage[i].gameObject.tag == "Boss") enemiesToDamage[i].GetComponent<Boss>().takeDamage(10);
                 }
                 animator.SetBool("IsAttacking", true);
+                meleeSource.Play();
                 timeBtwAttack = startTimeBtwAttack;
-                //meleeSource.Stop();
             }
             else animator.SetBool("IsAttacking", false);
         }
         else timeBtwAttack -= Time.deltaTime;
-
-        if (timeBtwKick <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
-                {
-                    if (enemiesToDamage[i].gameObject.tag == "Enemy") enemiesToDamage[i].GetComponent<FoeMov>().takeDamage(10);
-                    if (enemiesToDamage[i].gameObject.tag == "Ghul") enemiesToDamage[i].GetComponent<GhulMov>().takeDamageGhul(10);
-                    if (enemiesToDamage[i].gameObject.tag == "Angel") enemiesToDamage[i].GetComponent<AngelMov>().takeDamage(10);
-                    if (enemiesToDamage[i].gameObject.tag == "Boss") enemiesToDamage[i].GetComponent<Boss>().takeDamage(10);
-                }
-                animator.SetBool("IsKicking", true);
-                timeBtwKick = startTimeBtwKick;
-            }
-            else animator.SetBool("IsKicking", false);
-        }else timeBtwKick -= Time.deltaTime;
-
 
         if (!feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
@@ -123,13 +99,12 @@ public class PlayerMov : MonoBehaviour
 
     void Move(float horizontal)
     {
-        if (horizontal == 0)
+        if (horizontal == 0 || !feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             playerSource.Stop();
         }
-        else if(horizontal != 0 && !playerSource.isPlaying)
+        else if(horizontal != 0 && !playerSource.isPlaying && feet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
-            playerSource.clip = walkClip;
             playerSource.Play();
         } 
          _rigidbody2D.velocity = new Vector2(horizontal * Speed, _rigidbody2D.velocity.y);
@@ -141,7 +116,6 @@ public class PlayerMov : MonoBehaviour
         if (horizontal > 0 && !faceRight || horizontal < 0 && faceRight)
         {
             faceRight = !faceRight;
-
             transform.Rotate(0f, 180f, 0f);
         }
     }

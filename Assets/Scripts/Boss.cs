@@ -128,12 +128,10 @@ public class Boss : MonoBehaviour
     }
     IEnumerator Shooting()
     {
-        canHugeShoot = false;
         animator.SetBool("Fire", true);
         Instantiate(projectile, fireSpot.position, fireSpot.rotation);
         yield return new WaitForSeconds(0.5f);
         animator.SetBool("Fire", false);
-        canHugeShoot = true;
     }
 
     IEnumerator HugeShooting()

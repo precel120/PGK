@@ -15,16 +15,19 @@ public class PlayerSpell : Spell
     private float earthCooldown;
     private float earthCooldownDuration = 0.0f;
 
-    private bool canUseFire = false;
+    private bool canUseFire = true;
     public bool CanUseFire { get { return canUseFire; } set { canUseFire = value; } }
-    private bool canUseFrost = false;
+    private bool canUseFrost = true;
     public bool CanUseFrost { get { return canUseFrost; } set { canUseFrost = value; } }
-    private bool canUseEarth = false;
+    private bool canUseEarth = true;
     public bool CanUseEarth { get { return canUseEarth; } set { canUseEarth = value; } }
 
     private FireCooldownMeter fireCooldownMeter;
     private FrostCooldownMeter frostCooldownMeter;
     private EarthCooldownMeter earthCooldownMeter;
+
+    public AudioSource earthSource;
+    public AudioSource fireSource;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +85,7 @@ public class PlayerSpell : Spell
     {
         if (key == fireballKey)
         {
+            fireSource.Play();
             Instantiate(fireballprefab, fireSpot.position, fireSpot.rotation);
         }
         if (key == frostballKey)
@@ -90,6 +94,7 @@ public class PlayerSpell : Spell
         }
         if(key == earthSpellKey)
         {
+            earthSource.Play();
             Instantiate(earthSpellprefab, new Vector3(fireSpot.position.x, fireSpot.position.y - 0.97f, fireSpot.position.z), fireSpot.rotation);
         }
     }

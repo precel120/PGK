@@ -8,6 +8,7 @@ public class BossProjectile : MonoBehaviour
     private Rigidbody2D rigidbody;
     private Boss boss;
     public int dmgAmount;
+    public bool smallProjectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,11 @@ public class BossProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (smallProjectile && collision.gameObject.CompareTag("Water"))
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().takeDamage(dmgAmount);
             Destroy(gameObject);

@@ -10,6 +10,7 @@ public class ProjectileMov : MonoBehaviour
     public ParticleSystem waterExplosion;
     private float lifeTime = 2.0f;
     private Vector3 startingPos;
+
     // Start is called before the first frame update
     void Start()
     {
