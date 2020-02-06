@@ -17,7 +17,6 @@ public class EarthScroll : MonoBehaviour
         {
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseEarth = true;
-            GameObject.FindObjectOfType<ChangeText>().TextChange("EarthBall - 'U'");
             locked.enabled = false;
         }
     }

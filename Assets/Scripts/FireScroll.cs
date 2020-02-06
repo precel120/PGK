@@ -13,7 +13,6 @@ public class FireScroll : MonoBehaviour
         {
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseFire = true;
-            GameObject.FindObjectOfType<ChangeText>().TextChange("Fireball - 'H'");
             locked.enabled = false;
         }
     }

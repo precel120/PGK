@@ -13,7 +13,6 @@ public class FrostScroll : MonoBehaviour
         {
             Destroy(gameObject);
             collision.gameObject.GetComponent<PlayerSpell>().CanUseFrost = true;
-            GameObject.FindObjectOfType<ChangeText>().TextChange("Frostball - 'K'");
             locked.enabled = false;
         }
     }

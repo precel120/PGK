@@ -149,8 +149,6 @@ public class Boss : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         canShoot = true;
-        yield return new WaitForSeconds(5f);
-        canHugeShoot = true;
     }
 
     IEnumerator Melee()
