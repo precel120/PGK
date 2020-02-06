@@ -46,7 +46,7 @@ public class PlayerSpell : Spell
     {
         if(Time.time > fireCooldownDuration)
         {
-            if (Input.GetKeyDown(fireballKey) && canUseFire)
+            if (Input.GetKeyDown(fireballKey) || Input.GetButtonDown("Fire") && canUseFire)
             {
                 Shoot(fireballKey);
                 fireCooldownDuration = Time.time + fireCooldown;
@@ -58,7 +58,7 @@ public class PlayerSpell : Spell
 
         if (Time.time > frostCooldownDuration)
         {
-            if (Input.GetKeyDown(frostballKey) && canUseFrost)
+            if (Input.GetKeyDown(frostballKey) || Input.GetButtonDown("Ice") && canUseFrost)
             {
                 Shoot(frostballKey);
                 frostCooldownDuration = Time.time + frostCooldown;
@@ -70,7 +70,7 @@ public class PlayerSpell : Spell
 
         if(Time.time > earthCooldownDuration)
         {
-            if (Input.GetKeyDown(earthSpellKey) && canUseEarth)
+            if (Input.GetKeyDown(earthSpellKey) || Input.GetButtonDown("Rock") && canUseEarth)
             {
                 Shoot(earthSpellKey);
                 earthCooldownDuration = Time.time + earthCooldown;

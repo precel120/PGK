@@ -52,7 +52,7 @@ public class PlayerMov : MonoBehaviour
             extraJump = 2;
         }
 
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("w")  && extraJump > 0)
+        if (Input.GetButtonDown("Jump") || Input.GetKeyDown("w")  && extraJump > 0)
         {
             Jump();
         }
@@ -67,7 +67,7 @@ public class PlayerMov : MonoBehaviour
 
         if (timeBtwAttack <= 0)
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            if (Input.GetKeyDown(KeyCode.J) || Input.GetButtonDown("Attack"))
             {
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatisEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
