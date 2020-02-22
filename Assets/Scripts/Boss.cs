@@ -27,7 +27,8 @@ public class Boss : MonoBehaviour
     public GameObject closeWall;
     public GameObject hpBar;
 
-    public Transform attackPoint;
+    public Transform swordPoint;
+    public Transform uppercutPoint;
     public float attackRange = 0.5f;
     public LayerMask playerLayer;
     private float lastAttackTime = 0;
@@ -63,11 +64,18 @@ public class Boss : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Speed * Time.deltaTime);
             Flip();
             float distanceToPlayer = Vector3.Distance(gameObject.transform.position, player.transform.position);
-            if(distanceToPlayer <= 4)
+            if (distanceToPlayer <= 2.5)
             {
                 if (Time.time > lastAttackTime)
                 {
-                    StartCoroutine(Melee());
+                    StartCoroutine(Melee(1));
+                    lastAttackTime = Time.time + attackDelay;
+                }
+            }else if (distanceToPlayer <= 4)
+            {
+                if (Time.time > lastAttackTime)
+                {
+                    StartCoroutine(Melee(0));
                     lastAttackTime = Time.time + attackDelay;
                 }
             }else if (distanceToPlayer > 8)
@@ -151,36 +159,41 @@ public class Boss : MonoBehaviour
         canShoot = true;
     }
 
-    IEnumerator Melee()
+    IEnumerator Melee(int choice)
     {
-        int choice = Random.Range(0, 2);
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
-        foreach (Collider2D play in hitPlayer)
+        Collider2D[] hitPlayer;
+        switch (choice)
         {
-            switch (choice)
-            {
-                case 0:
-                    animator.SetBool("useSword", true);
-                    yield return new WaitForSeconds(0.6f);
-                    player.GetComponent<PlayerHealth>().takeDamage(20);
-                    animator.SetBool("useSword", false);
-                    break;
-                case 1:
-                    animator.SetBool("Uppercut", true);
-                    yield return new WaitForSeconds(0.6f);
+            case 0:
+                animator.SetBool("useSword", true);
+                yield return new WaitForSeconds(0.5f);
+                animator.SetBool("useSword", false);
+                hitPlayer = Physics2D.OverlapCircleAll(swordPoint.position, attackRange, playerLayer);
+                foreach (Collider2D play in hitPlayer)
+                {
+                    player.GetComponent<PlayerHealth>().takeDamage(15);
+                }
+                break;
+            case 1:
+                animator.SetBool("Uppercut", true);
+                yield return new WaitForSeconds(0.4f);
+                animator.SetBool("Uppercut", false);
+                hitPlayer = Physics2D.OverlapCircleAll(uppercutPoint.position, attackRange, playerLayer);
+                foreach (Collider2D play in hitPlayer)
+                {
                     player.GetComponent<PlayerHealth>().takeDamage(10);
-                    animator.SetBool("Uppercut", false);
-                    break;
-            }
+                }
+                break;
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (attackPoint == null)
+        if (uppercutPoint == null || swordPoint == null)
         {
             return;
         }
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(uppercutPoint.position, attackRange);
+        Gizmos.DrawWireSphere(swordPoint.position, attackRange);
     }
 }
