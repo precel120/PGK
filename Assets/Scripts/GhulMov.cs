@@ -21,7 +21,7 @@ public class GhulMov : MonoBehaviour
         transform.position = points[0].position;
         currentPoint = 0;
         transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
-        health = 55;
+        health = 19;
     }
 
     // Update is called once per frame

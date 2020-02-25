@@ -81,13 +81,19 @@ public class ProjectileMov : MonoBehaviour
         {
             collision.gameObject.GetComponent<Boss>().takeDamage(5);
         }
-        if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Ghul")
+        if (gameObject.tag == "Water" && collision.gameObject.tag == "Ghul")
         {
             collision.gameObject.GetComponent<GhulMov>().takeDamageGhul(20);
         }
         if (gameObject.tag == "Fireball" && collision.gameObject.tag == "Angel")
         {
             collision.gameObject.GetComponent<AngelMov>().takeDamage(20);
+        }
+        if(gameObject.tag == "Frostball" && collision.gameObject.tag == "Angel")
+        {
+            collision.gameObject.GetComponent<AngelMov>().takeDamage(30);
+            if (collision.gameObject.GetComponent<AngelMov>().freezeCounter == 0)
+                collision.gameObject.GetComponent<AngelMov>().isFrozen = true;
         }
         if (gameObject.tag == "Water" && collision.gameObject.tag == "Enemy")
         {
